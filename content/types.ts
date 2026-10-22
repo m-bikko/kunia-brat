@@ -58,9 +58,10 @@ export interface Dictionary {
     sheetTag: string;
   };
   nav: {
-    tagline: string;
     skipToContent: string;
     cabinets: string;
+    order70: string;
+    process: string;
     catalog: string;
     services: string;
     about: string;
@@ -70,11 +71,16 @@ export interface Dictionary {
     languageLabel: string;
   };
   hero: {
-    title: SplitTitle;
+    kicker: string;
+    title: Lines;
     subtitle: string;
     primaryCta: string;
-    conceptCaption: string;
-    slideLabel: string;
+    secondaryCta: string;
+    sheetLabel: string;
+    sheetScale: string;
+    callouts: readonly [string, string, string];
+    axisX: string;
+    axisY: string;
   };
   stats: {
     label: string;

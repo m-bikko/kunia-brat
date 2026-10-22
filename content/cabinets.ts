@@ -99,7 +99,5 @@ export const cabinets: Record<CabinetId, Cabinet> = {
 /** Cabinets with a 3D walkthrough, in showroom order. */
 export const tourCabinetIds = ["informatics", "art", "sewing"] as const satisfies readonly CabinetId[];
 
-/** Renders rotated in the hero. */
-export const heroCabinetIds = ["kazakh", "art", "informatics", "sewing"] as const satisfies readonly CabinetId[];
 
 export const languageCabinetIds = ["kazakh", "russian", "english"] as const satisfies readonly CabinetId[];
