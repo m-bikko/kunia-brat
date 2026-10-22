@@ -247,3 +247,76 @@ html[data-intro-kind="bell"] .intro-scene[data-kind="bell"] {
   animation: intro-pop-in 0.4s var(--ease-spring) 2.5s both;
 }
 
+/* ---------- Intro: blocks «Фигуры-кубики» ---------- */
+@keyframes intro-tumble {
+  from {
+    opacity: 0;
+    transform: translateY(-110vh) rotate(var(--turn, 0deg));
+  }
+  8% {
+    opacity: 1;
+  }
+}
+@keyframes intro-from-below {
+  from {
+    transform: translateY(60vh);
+  }
+}
+@keyframes intro-chpok {
+  40% {
+    transform: scale(1.06);
+  }
+}
+.intro-block {
+  animation: intro-tumble 0.9s var(--ease-bounce) var(--at, 0s) both;
+}
+.intro-scene[data-kind="blocks"] [data-part="room"] > path:nth-child(2) {
+  animation: intro-from-below 0.6s var(--ease-spring) 0.1s both;
+}
+.intro-scene[data-kind="blocks"] [data-part="room"] > path:nth-child(1) {
+  animation: intro-tumble 0.8s var(--ease-bounce) 0.3s both;
+}
+.intro-scene[data-kind="blocks"] [data-part="room"] > path:nth-child(3) {
+  animation: intro-fade-in 0.3s ease 0.9s both;
+}
+.intro-scene[data-kind="blocks"] [data-part="window"] {
+  --turn: -20deg;
+  animation: intro-tumble 0.8s var(--ease-bounce) 0.55s both;
+}
+.intro-scene[data-kind="blocks"] [data-part="shelf"] {
+  --turn: 10deg;
+  animation: intro-tumble 0.8s var(--ease-bounce) 0.7s both;
+}
+.intro-scene[data-kind="blocks"] [data-part="board"] {
+  --turn: -8deg;
+  animation: intro-tumble 0.8s var(--ease-bounce) 0.85s both;
+}
+.intro-scene[data-kind="blocks"] [data-part="teacher"] {
+  --turn: 6deg;
+  animation: intro-tumble 0.8s var(--ease-bounce) 1s both;
+}
+.intro-scene[data-kind="blocks"] [data-part="desk"] {
+  --turn: calc((var(--i, 0) - 2.5) * 9deg);
+  animation: intro-tumble 0.75s var(--ease-bounce) calc(1.15s + var(--i, 0) * 0.1s) both;
+}
+.intro-scene[data-kind="blocks"] [data-part="clock"] {
+  --turn: 200deg;
+  transform-origin: 50% 50%;
+  animation: intro-tumble 0.75s var(--ease-bounce) 1.85s both;
+}
+.intro-scene[data-kind="blocks"] [data-part="books"] {
+  --turn: -14deg;
+  animation: intro-tumble 0.7s var(--ease-bounce) 2s both;
+}
+.intro-scene[data-kind="blocks"] [data-part="globe"] {
+  --turn: 30deg;
+  animation: intro-tumble 0.7s var(--ease-bounce) 2.1s both;
+}
+.intro-scene[data-kind="blocks"] [data-part="stars"] {
+  transform-origin: 50% 50%;
+  animation: intro-pop-in 0.4s var(--ease-spring) 2.35s both;
+}
+.intro-scene[data-kind="blocks"] [data-intro-subject] > svg {
+  animation: intro-chpok 0.4s var(--ease-spring) 2.7s;
+}
+
