@@ -189,5 +189,12 @@ export interface Dictionary {
       /** Spoken description of the cartoon classroom on the first screen. */
       illustrationAlt: string;
     };
+    order70: {
+      /** Send button; `{n}` is the number of items that go for a quote. */
+      send: PluralForms;
+      /** Read out after each tick; `{have}`, `{total}`. */
+      liveSummary: string;
+      shareLabel: string;
+    };
   };
 }

@@ -1,17 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useId, useRef, useState, type KeyboardEvent } from "react";
 import { Check, MessageCircle, RotateCcw } from "lucide-react";
 
 import { SheetHeading } from "@/components/sheet";
 import { buttonVariants } from "@/components/ui/button";
-import { cabinetIds, cabinets, type CabinetId } from "@/content/cabinets";
-import { order70 } from "@/content/order70";
+import { cabinetIds, cabinets } from "@/content/cabinets";
 import type { Dictionary } from "@/content/types";
-import { countItems } from "@/lib/order70";
-import { buildQuoteMessage } from "@/lib/quote-message";
-import { whatsappUrl } from "@/lib/site";
+import { itemKey, useOrder70Kit } from "@/hooks/use-order70-kit";
 import { cn } from "@/lib/utils";
 
 interface Order70ToolProps {
@@ -20,52 +16,13 @@ interface Order70ToolProps {
   sheet: string;
 }
 
-/** Key of an item inside one cabinet; names can repeat across categories. */
-const itemKey = (group: number, item: number): string => `${group}:${item}`;
-
 /**
  * "#order70": pick a classroom, tick what the school already has, send the rest for a quote.
- * Ticks are kept per classroom while switching tabs.
+ * Ticks are kept per classroom while switching tabs (state in useOrder70Kit).
  */
 export const Order70Tool = ({ t, items, sheet }: Order70ToolProps): React.JSX.Element => {
-  const [active, setActive] = useState<CabinetId>("informatics");
-  const [ticks, setTicks] = useState<Partial<Record<CabinetId, readonly string[]>>>({});
-  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const baseId = useId();
-
-  const groups = order70[active];
-  const checked = ticks[active] ?? [];
-  const total = countItems(active);
-  const have = checked.length;
-  const haveNames = groups.flatMap((group, g) =>
-    group.items.flatMap((item, i) => (checked.includes(itemKey(g, i)) ? [item.name] : [])),
-  );
-  const message = buildQuoteMessage({ cabinet: items[active].name, total, haveItems: haveNames, templates: t.message });
-
-  const toggle = (key: string): void =>
-    setTicks((previous) => {
-      const current = previous[active] ?? [];
-      return { ...previous, [active]: current.includes(key) ? current.filter((k) => k !== key) : [...current, key] };
-    });
-
-  const reset = (): void => setTicks((previous) => ({ ...previous, [active]: [] }));
-
-  const onTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number): void => {
-    const last = cabinetIds.length - 1;
-    const moves: Record<string, number> = {
-      ArrowRight: index === last ? 0 : index + 1,
-      ArrowLeft: index === 0 ? last : index - 1,
-      Home: 0,
-      End: last,
-    };
-    const next = moves[event.key];
-    if (next === undefined) return;
-    event.preventDefault();
-    setActive(cabinetIds[next]);
-    tabRefs.current[next]?.focus();
-  };
-
-  const panelId = `${baseId}-panel`;
+  const { active, select, tabRefs, onTabKeyDown, baseId, panelId, groups, isChecked, toggle, reset, total, have, need, href } =
+    useOrder70Kit({ items, templates: t.message });
 
   return (
     <section id="order70" aria-labelledby="order70-title" className="border-b border-line py-20 lg:py-28">
@@ -88,7 +45,7 @@ export const Order70Tool = ({ t, items, sheet }: Order70ToolProps): React.JSX.El
                   aria-selected={selected}
                   aria-controls={panelId}
                   tabIndex={selected ? 0 : -1}
-                  onClick={() => setActive(id)}
+                  onClick={() => select(id)}
                   onKeyDown={(event) => onTabKeyDown(event, index)}
                   className={cn(
                     "flex shrink-0 items-center gap-2 border-r border-line px-4 py-3 text-sm whitespace-nowrap transition-colors",
@@ -118,7 +75,7 @@ export const Order70Tool = ({ t, items, sheet }: Order70ToolProps): React.JSX.El
                   <ul className="mt-2 divide-y divide-line border-y border-line">
                     {group.items.map((item, i) => {
                       const key = itemKey(g, i);
-                      const on = checked.includes(key);
+                      const on = isChecked(key);
                       return (
                         <li key={key}>
                           <label className="relative flex cursor-pointer items-start gap-3 py-2.5 text-[15px]">
@@ -179,12 +136,12 @@ export const Order70Tool = ({ t, items, sheet }: Order70ToolProps): React.JSX.El
                 <div className="bg-surface p-3">
                   <dt className="label-mono text-ink-faint">{t.need}</dt>
                   <dd data-testid="order70-need" className="mt-2 text-2xl font-semibold text-brand tabular-nums">
-                    {total - have}
+                    {need}
                   </dd>
                 </div>
               </dl>
               <a
-                href={whatsappUrl(message)}
+                href={href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(buttonVariants({ size: "lg" }), "mt-4 w-full justify-between")}

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { en } from "@/content/locales/en";
 import { buildQuoteMessage, type QuoteTemplates } from "@/lib/quote-message";
 import { fill } from "@/lib/template";
 
@@ -49,5 +50,12 @@ describe("buildQuoteMessage", () => {
     const message = buildQuoteMessage({ cabinet: "Арт", total: 2, haveItems: ["x".repeat(3000), "y"], templates });
     expect(message).toContain("x".repeat(3000));
     expect(message).toContain("и ещё 1");
+  });
+});
+
+describe("English request", () => {
+  it("reads correctly with one item left to source", () => {
+    const message = buildQuoteMessage({ cabinet: "Informatics", total: 2, haveItems: ["Desk"], templates: en.order70.message });
+    expect(message).not.toMatch(/\b1 items\b/);
   });
 });

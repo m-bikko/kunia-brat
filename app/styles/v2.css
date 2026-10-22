@@ -49,3 +49,24 @@
 .v2 .on-navy :focus-visible {
   outline-color: var(--sun);
 }
+
+/* A tick that pops in (v2 tool). */
+@keyframes v2-pop {
+  0% {
+    transform: scale(0.5);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.v2-pop {
+  animation: v2-pop 0.35s var(--ease-out-expo) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-pop {
+    animation: none;
+  }
+}

@@ -86,7 +86,7 @@ export const en: Dictionary = {
       total: "Order No. 70 lists {total} items.",
       have: "Already in place ({have}): {list}.",
       haveNone: "We need the full kit.",
-      need: "To source: {need} items.",
+      need: "Items to source: {need}.",
       more: "and {count} more",
     },
   },
@@ -278,6 +278,14 @@ export const en: Dictionary = {
     menuLabel: "Menu",
     hero: {
       illustrationAlt: "Drawing of a classroom: an interactive panel, the teacher's desk, student desks, a bookcase and a globe",
+    },
+    order70: {
+      send: {
+        one: "Send {n} item for a quote",
+        other: "Send {n} items for a quote",
+      },
+      liveSummary: "{have} of {total} in place",
+      shareLabel: "Already at the school",
     },
   },
 };

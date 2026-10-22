@@ -89,3 +89,24 @@ test("the first screen shows the classroom as the intro target with three labels
   await expect(page.getByRole("link", { name: /Приказу № 70/ }).first()).toHaveAttribute("href", "/v2#order70");
   await expect(page.locator("#stages li")).toHaveCount(4);
 });
+
+test("v2 tool: tick, count and send N items with the keyboard only", async ({ page }) => {
+  await page.goto("/v2#order70");
+  const tool = page.locator("#order70");
+  const tabs = tool.getByRole("tab");
+  await tabs.first().focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(tabs.nth(1)).toHaveAttribute("aria-selected", "true");
+  await expect(tabs.nth(1)).toBeFocused();
+  await page.keyboard.press("ArrowLeft");
+  await expect(tabs.first()).toHaveAttribute("aria-selected", "true");
+  const first = tool.getByRole("tabpanel").getByRole("checkbox").first();
+  await first.focus();
+  await page.keyboard.press("Space");
+  await expect(tool.getByTestId("order70-have")).toHaveText("1");
+  await expect(tool.getByTestId("order70-need")).toHaveText("21");
+  const send = tool.getByRole("link", { name: /Отправить 21 позицию на расчёт/ });
+  await expect(send).toBeVisible();
+  expect(new URL((await send.getAttribute("href")) ?? "").searchParams.get("text")).toContain("Информатика");
+  await expect(tool.getByText("Есть 1 из 22")).toBeAttached();
+});
