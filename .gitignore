@@ -44,3 +44,7 @@ next-env.d.ts
 # agent tooling
 .gstack/
 .playwright-cli/
+
+# test output
+test-results/
+playwright-report/
