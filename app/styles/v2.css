@@ -49,6 +49,9 @@
 .v2 .on-navy :focus-visible {
   outline-color: var(--sun);
 }
+.v2 .on-navy .on-light :focus-visible {
+  outline-color: var(--brand);
+}
 
 /* A tick that pops in (v2 tool). */
 @keyframes v2-pop {

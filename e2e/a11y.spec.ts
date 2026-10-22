@@ -99,3 +99,42 @@ for (const path of ["/", "/en", "/v2", "/kk/v2", "/en/v2"]) {
     expect(failures).toEqual([]);
   });
 }
+
+test("the focus ring inside the white closing card is brand blue, not yellow", async ({ page }) => {
+  await page.goto("/v2");
+  await page.keyboard.press("Tab");
+  const color = await page.locator("#contact select").evaluate((select) => {
+    (select as HTMLSelectElement).focus();
+    return getComputedStyle(select).outlineColor;
+  });
+  expect(color).toBe("rgb(48, 89, 223)");
+});
+
+test("under reduced motion the cabinet cards do not move on hover", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/v2#index");
+  const card = page.locator("#index [data-cabinet]").first();
+  await card.hover();
+  await page.waitForTimeout(400);
+  const moved = await card.evaluate((node) => {
+    const style = getComputedStyle(node);
+    return { translate: style.translate, rotate: style.rotate, transform: style.transform };
+  });
+  expect(moved).toEqual({ translate: "none", rotate: "none", transform: "none" });
+});
+
+test("phones do not download the hover-only concept renders", async ({ browser }) => {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const page = await context.newPage();
+  const renders: string[] = [];
+  page.on("request", (request) => {
+    if (/(%2F|\/)(informatics|art|sewing|pottery|workshop|kazakh|russian|english)\.[\w-]+\.webp/.test(request.url())) renders.push(request.url());
+  });
+  await page.goto("/v2");
+  expect(await page.evaluate(() => matchMedia("(hover: none)").matches)).toBe(true);
+  await page.locator("#index").scrollIntoViewIfNeeded();
+  await page.evaluate(() => window.scrollBy(0, 2400));
+  await page.waitForTimeout(800);
+  expect(renders).toEqual([]);
+  await context.close();
+});

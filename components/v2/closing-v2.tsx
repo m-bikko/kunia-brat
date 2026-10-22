@@ -58,7 +58,7 @@ export const ClosingV2 = ({ t, address, items }: ClosingV2Props): React.JSX.Elem
           </ul>
         </div>
 
-        <div className="rounded-tile bg-white p-5 text-navy sm:p-6 lg:col-span-5">
+        <div className="on-light rounded-tile bg-white p-5 text-navy sm:p-6 lg:col-span-5">
           <label htmlFor={selectId} className="text-sm font-black tracking-wide uppercase">
             {t.selectLabel}
           </label>

@@ -48,3 +48,6 @@ next-env.d.ts
 # test output
 test-results/
 playwright-report/
+
+# Claude Code session lock
+.claude/scheduled_tasks.lock

@@ -10,9 +10,12 @@ for (const kind of cartoonKinds) {
       page.on("console", (message) => {
         if (message.type() === "error") errors.push(message.text());
       });
+      page.on("pageerror", (error) => errors.push(error.message));
       await page.goto(`${path}?intro=${kind}`);
       await expect(page.locator("html")).toHaveAttribute("data-intro-kind", kind);
       await expect(page.locator(`.intro-scene[data-kind="${kind}"]`)).toBeVisible();
+      // The controller took over (otherwise only the boot failsafe would end the intro, at 4.4 s).
+      await expect(page.locator(".intro")).toHaveAttribute("data-js", "", { timeout: 3000 });
       await expect(page.locator("html")).not.toHaveAttribute("data-intro", { timeout: 4600 });
       await expect(page.locator("[data-intro-target]").first()).toBeVisible();
       expect(errors).toEqual([]);
@@ -62,3 +65,27 @@ for (const path of ["/", "/v2"]) {
     expect(size).toBeLessThan(80_000);
   });
 }
+
+test("cartoon intro captions keep their rounded bold style on v1", async ({ page }) => {
+  await page.goto("/?intro=pop");
+  const caption = page.locator('.intro-scene[data-kind="pop"] .intro-caption-soft');
+  await expect(caption).toBeAttached();
+  const style = await caption.evaluate((node) => {
+    const computed = getComputedStyle(node);
+    return { weight: computed.fontWeight, size: parseFloat(computed.fontSize) };
+  });
+  expect(style.weight).toBe("800");
+  expect(style.size).toBeGreaterThanOrEqual(18);
+});
+
+test("the pop box leaves straight down, centred under the room", async ({ page }) => {
+  await page.goto("/v2?intro=pop", { waitUntil: "commit" });
+  await page.waitForTimeout(1350);
+  const offset = await page.evaluate(() => {
+    const box = document.querySelector(".intro-pop-box")?.getBoundingClientRect();
+    const room = document.querySelector('.intro-scene[data-kind="pop"] [data-intro-subject]')?.getBoundingClientRect();
+    return box && room ? Math.abs(box.left + box.width / 2 - (room.left + room.width / 2)) : 999;
+  });
+  expect(offset).toBeLessThan(12);
+});
+

@@ -70,7 +70,7 @@ export const ProcessV2 = ({ t, states }: { t: Dictionary["process"]; states: Dic
               data-step={index}
               className={cn(
                 "rounded-card border-[2.5px] border-navy bg-white p-6 shadow-sticker transition-transform duration-300 sm:p-7 lg:min-h-[30vh]",
-                active === index && "lg:-translate-y-1",
+                active === index && "lg:motion-safe:-translate-y-1",
               )}
             >
               <div className="flex items-center gap-3">

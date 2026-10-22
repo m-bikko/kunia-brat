@@ -32,7 +32,7 @@ export const CabinetsV2 = ({ locale, t }: CabinetsV2Props): React.JSX.Element =>
           </span>
         ))}
       </h2>
-      <p className="max-w-[44ch] text-lg leading-relaxed font-semibold text-navy-muted lg:col-span-5">{t.v2.index.hint}</p>
+      <p className="hidden max-w-[44ch] text-lg leading-relaxed font-semibold text-navy-muted lg:col-span-5 [@media(hover:hover)]:block">{t.v2.index.hint}</p>
     </div>
 
     <ul className="mt-10 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
@@ -44,20 +44,23 @@ export const CabinetsV2 = ({ locale, t }: CabinetsV2Props): React.JSX.Element =>
           <li
             key={id}
             data-cabinet={id}
-            className="group relative flex flex-col rounded-tile border-[2.5px] border-navy bg-white p-2.5 shadow-sticker-sm sm:rounded-card sm:p-4 sm:shadow-sticker transition-transform duration-300 ease-out focus-within:-translate-y-1 hover:-translate-y-1 hover:-rotate-[0.6deg] motion-reduce:transition-none motion-reduce:hover:transform-none"
+            className="group relative flex flex-col rounded-tile border-[2.5px] border-navy bg-white p-2.5 shadow-sticker-sm transition-transform duration-300 ease-out sm:rounded-card sm:p-4 sm:shadow-sticker motion-safe:focus-within:-translate-y-1 motion-safe:hover:-translate-y-1 motion-safe:hover:-rotate-[0.6deg]"
           >
             <div className="relative aspect-[4/3] overflow-clip rounded-tile border-[2.5px] border-navy bg-cloud">
               <CabinetIcon
                 id={id}
                 className="absolute inset-0 m-auto size-[76%] transition-opacity duration-300 group-focus-within:opacity-0 group-hover:opacity-0"
               />
-              <Image
-                src={cabinet.image}
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 18rem, (min-width: 640px) 45vw, 90vw"
-                className="object-cover opacity-0 transition-opacity duration-300 group-focus-within:opacity-100 group-hover:opacity-100"
-              />
+              {/* Hover-only: not rendered (so never downloaded) on touch screens. */}
+              <div className="absolute inset-0 hidden [@media(hover:hover)]:block">
+                <Image
+                  src={cabinet.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 18rem, 45vw"
+                  className="object-cover opacity-0 transition-opacity duration-300 group-focus-within:opacity-100 group-hover:opacity-100"
+                />
+              </div>
               <Sticker tone="sun" className="absolute top-2 left-2 px-2 text-[11px] sm:top-3 sm:left-3 sm:px-2.5 sm:text-xs">
                 {cabinet.code}
               </Sticker>
@@ -90,6 +93,6 @@ export const CabinetsV2 = ({ locale, t }: CabinetsV2Props): React.JSX.Element =>
         );
       })}
     </ul>
-    <p className="mt-4 px-2 text-sm font-semibold text-navy-muted">{t.index.previewCaption}</p>
+    <p className="mt-4 hidden px-2 text-sm font-semibold text-navy-muted [@media(hover:hover)]:block">{t.index.previewCaption}</p>
   </section>
 );
