@@ -17,13 +17,13 @@ test("plays once per session and hands over to the first screen", async ({ page 
   // The flight ends ≈4.4 s after boot; the boot failsafe must not be what ends it.
   await expect(html).not.toHaveAttribute("data-intro", { timeout: 5000 });
   await expect(page.locator(".intro")).toBeHidden();
-  await expect(page.locator("[data-plan-target]")).toBeVisible();
+  await expect(page.locator("[data-intro-target]")).toBeVisible();
   await page.reload();
   await expect(html).not.toHaveAttribute("data-intro");
 });
 
 test("Escape skips the intro", async ({ page }) => {
-  await page.goto("/?intro=1");
+  await page.goto("/?intro=blueprint");
   await expect(page.locator("html")).toHaveAttribute("data-intro", "play");
   await page.waitForTimeout(800);
   await page.keyboard.press("Escape");
@@ -40,7 +40,7 @@ test("deep links skip the intro", async ({ page }) => {
 
 test("narrow screens fade the intro out instead of flying", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/?intro=1");
+  await page.goto("/?intro=blueprint");
   await expect(page.locator("html")).toHaveAttribute("data-intro", "play");
   await expect(page.locator("html")).not.toHaveAttribute("data-intro", { timeout: 4500 });
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
@@ -57,11 +57,11 @@ test("first screen works without JavaScript", async ({ browser }) => {
 
 test("if the app's JavaScript never loads, the intro ends by itself and the first screen shows", async ({ page }) => {
   await page.route(appScripts, (route) => route.abort());
-  await page.goto("/?intro=1");
+  await page.goto("/?intro=blueprint");
   await expect(page.locator("html")).toHaveAttribute("data-intro", "play");
   await expect(page.locator("html")).not.toHaveAttribute("data-intro", { timeout: 4800 });
   await expect(page.locator(".intro")).toBeHidden();
-  await expect(page.locator("[data-plan-target]")).toBeVisible();
+  await expect(page.locator("[data-intro-target]")).toBeVisible();
 });
 
 test("slow JavaScript does not bring the intro back after it has faded", async ({ page }) => {
@@ -69,7 +69,7 @@ test("slow JavaScript does not bring the intro back after it has faded", async (
     await new Promise((resolve) => setTimeout(resolve, 4600));
     await route.continue();
   });
-  await page.goto("/?intro=1", { waitUntil: "commit" });
+  await page.goto("/?intro=blueprint", { waitUntil: "commit" });
   const start = Date.now();
   await page.waitForTimeout(4500);
   const shown: number[] = [];
@@ -84,4 +84,20 @@ test("slow JavaScript does not bring the intro back after it has faded", async (
     await page.waitForTimeout(50);
   }
   expect(shown).toEqual([]);
+});
+
+test("the chosen kind is marked on <html> and only its scene shows", async ({ page }) => {
+  await page.goto("/?intro=blueprint");
+  await expect(page.locator("html")).toHaveAttribute("data-intro-kind", "blueprint");
+  await expect(page.locator('.intro-scene[data-kind="blueprint"]')).toBeVisible();
+});
+
+test("the page does not scroll under the intro", async ({ page }) => {
+  await page.goto("/?intro=blueprint");
+  await expect(page.locator("html")).toHaveAttribute("data-intro", "play");
+  await page.waitForTimeout(500);
+  await page.keyboard.press("PageDown");
+  await page.keyboard.press("PageDown");
+  await page.waitForTimeout(300);
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
 });

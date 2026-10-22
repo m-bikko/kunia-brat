@@ -24,11 +24,11 @@ interface PlanDrawingProps {
 
 /**
  * The finished classroom as a sketch: colour layers, dimension lines that draw themselves and
- * callouts. `data-plan-target` is where the blueprint intro lands. Server-rendered; animation is CSS.
+ * callouts. `data-intro-target` is where the intro lands. Server-rendered; animation is CSS.
  */
 export const PlanDrawing = ({ callouts, axisX, axisY, label }: PlanDrawingProps): React.JSX.Element => (
   <div className="flex flex-1 items-center p-6 sm:p-8">
-    <div data-plan-target role="img" aria-label={label} className="relative mx-auto aspect-[880/650] w-full max-w-[34rem]">
+    <div data-intro-target role="img" aria-label={label} className="relative mx-auto aspect-[880/650] w-full max-w-[34rem]">
       {layers.map((src, index) => (
         <Image key={src.src} src={src} alt="" fill unoptimized priority={index === 0} className="object-contain" />
       ))}

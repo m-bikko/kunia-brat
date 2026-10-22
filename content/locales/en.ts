@@ -22,7 +22,16 @@ export const en: Dictionary = {
     sheet: "Sheet",
     sheetTag: "Sheet {n}",
   },
-  intro: { caption: "Every classroom starts with an axis", skip: "Skip intro" },
+  intro: {
+    captions: {
+      blueprint: "Every classroom starts with an axis",
+      pop: "Open the box: the classroom is ready",
+      blocks: "A classroom built from simple pieces",
+      pencil: "We draw it first, then fit it out",
+      bell: "There goes the bell: the classroom is ready",
+    },
+    skip: "Skip intro",
+  },
   nav: {
     skipToContent: "Skip to content",
     cabinets: "Classrooms",

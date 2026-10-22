@@ -1,4 +1,5 @@
-import { BlueprintIntro } from "@/components/intro/blueprint-intro";
+import { IntroScene } from "@/components/intro/intro-scene";
+import { IntroStage } from "@/components/intro/intro-stage";
 import { JsonLd } from "@/components/json-ld";
 import { CabinetIndex } from "@/components/sections/cabinet-index";
 import { Closing } from "@/components/sections/closing";
@@ -16,6 +17,7 @@ import { SiteHeader } from "@/components/site-header";
 import { WhatsappFab } from "@/components/whatsapp-fab";
 import { getDictionary } from "@/content/dictionaries";
 import type { Locale } from "@/lib/i18n";
+import { introPools } from "@/lib/intro";
 
 /**
  * The whole landing for one locale, as a set of drawing sheets: 01 first screen, 02 Order No. 70,
@@ -28,7 +30,11 @@ export const LandingPage = ({ locale }: { locale: Locale }): React.JSX.Element =
   return (
     <>
       <JsonLd locale={locale} t={t} />
-      <BlueprintIntro t={t.intro} />
+      <IntroStage version="v1" t={t.intro}>
+        {introPools.v1.map((kind) => (
+          <IntroScene key={kind} kind={kind} caption={t.intro.captions[kind]} />
+        ))}
+      </IntroStage>
       <SheetRuler />
       <SiteHeader locale={locale} t={t.nav} />
       <main id="main">

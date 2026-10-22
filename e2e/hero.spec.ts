@@ -10,7 +10,7 @@ for (const [path, text] of Object.entries(headlines)) {
   test(`first screen headline on ${path}`, async ({ page }) => {
     await page.goto(path);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(text);
-    await expect(page.locator("[data-plan-target]")).toBeVisible();
+    await expect(page.locator("[data-intro-target]")).toBeVisible();
   });
 }
 

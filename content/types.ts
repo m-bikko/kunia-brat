@@ -1,5 +1,6 @@
 import type { CabinetId } from "@/content/cabinets";
 import type { PluralForms } from "@/lib/i18n";
+import type { IntroKind } from "@/lib/intro";
 import type { QuoteTemplates } from "@/lib/quote-message";
 
 /** A display title split into lines exactly where the design breaks them. */
@@ -57,7 +58,8 @@ export interface Dictionary {
     sheetTag: string;
   };
   intro: {
-    caption: string;
+    /** One caption per intro kind (lib/intro.ts). */
+    captions: Record<IntroKind, string>;
     skip: string;
   };
   nav: {
