@@ -4,7 +4,7 @@ type: entity
 tags: [order70, tool, data, whatsapp]
 created: 2026-10-22
 updated: 2026-10-22
-sources: [scripts/extract_order70.py, content/order70.ts, components/sections/order70-tool.tsx, lib/quote-message.ts]
+sources: [scripts/extract_order70.py, content/order70.ts, hooks/use-order70-kit.ts, components/sections/order70-tool.tsx, components/v2/order70-v2.tsx, lib/quote-message.ts]
 ---
 
 # Инструмент «Приказ № 70»
@@ -29,3 +29,12 @@ sources: [scripts/extract_order70.py, content/order70.ts, components/sections/or
 `buildQuoteMessage` (`lib/quote-message.ts`): кабинет, число позиций по приказу, что уже есть, сколько подобрать.
 Список «есть» короче списка «нужно»; если сообщение длиннее 1 800 символов, хвост заменяется на «и ещё N».
 Тесты: `lib/quote-message.test.ts`, `content/order70.test.ts`, `e2e/order70.spec.ts`.
+
+## Общая логика v1 и v2
+
+Состояние инструмента (активный кабинет, отметки по кабинетам, сброс только текущего, счётчики, ссылка WhatsApp,
+клавиатура вкладок) живёт в хуке `useOrder70Kit`. Разметку рисует каждая версия своя: v1 — лист чертежа, v2
+([[soft-landing-v2]]) — чипсы, круглые галочки, пузыри-счётчики, полоса «уже есть» и кнопка «Отправить N позиций
+на расчёт» с формами множественного числа. Английская строка сообщения переписана («Items to source: {need}.»),
+чтобы не было «1 items».
+

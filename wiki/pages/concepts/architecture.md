@@ -17,6 +17,8 @@ sources: [app/, components/landing-page.tsx, next.config.ts]
 
 - `app/(ru)/` — свой root layout с `lang="ru"`, страница `/`. Русский без префикса, чтобы сохранить URL живого сайта.
 - `app/(intl)/[locale]/` — второй root layout для `/kk` и `/en` (`generateStaticParams`). Неизвестный сегмент → `notFound()` в странице.
+- v2 живёт в тех же root layout: `app/(ru)/v2/page.tsx` → `/v2`, `app/(intl)/[locale]/v2/page.tsx` → `/kk/v2`, `/en/v2`.
+  Метаданные `buildV2Metadata` (noindex, без hreflang), в `sitemap.xml` v2 нет. См. [[soft-landing-v2]].
 - `app/global-not-found.tsx` — 404 уровня роутинга; нужен, потому что root layout два (флаг `experimental.globalNotFound`).
 - `/ru` → 308 на `/` (redirect в `next.config.ts`).
 

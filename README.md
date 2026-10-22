@@ -1,15 +1,20 @@
 # AXIS landing (axisgroup.kz)
 
-Landing page for AXIS (AxisGroup), turnkey fit-out of school classrooms in Kazakhstan.
-Concept «Чертёж» (the page is a set of drawing sheets), a blueprint intro on the first visit
-and a working kit tool based on Order No. 70. Content and assets come from the live https://axisgroup.kz/.
+Landing page for AXIS (AxisGroup), turnkey fit-out of school classrooms in Kazakhstan, in two design
+versions that share content, data and logic:
+
+- **v1 «Чертёж»** at `/`: the page is a set of drawing sheets.
+- **v2 «Мягкая»** at `/v2`: the same story in a soft cartoon style (rounded stickers, own SVG art).
+
+Both have a working kit tool based on Order No. 70 and a random intro on the first visit of a session.
+Content and assets come from the live https://axisgroup.kz/. Production: https://kuni-brat.vercel.app
 
 ## Stack
 
 - Next.js 16.4 (App Router, Turbopack, Cache Components, Partial Prefetching)
 - TypeScript (strict), Tailwind CSS v4, shadcn/ui button primitive
 - motion (`motion/react`) for the intro flight, process and menus
-- lucide-react icons, Geist + Geist Mono via `next/font` (full Kazakh alphabet)
+- lucide-react icons, Geist + Geist Mono (v1) and Nunito (v2) via `next/font` (full Kazakh alphabet)
 
 ## Getting started
 
@@ -34,9 +39,10 @@ pnpm test:e2e       # builds, then Playwright (Chrome) against :3200
 
 | URL | Content |
 |---|---|
-| `/` | Russian (default locale, keeps the live site's URL) |
-| `/kk` | Kazakh |
-| `/en` | English |
+| `/` | v1, Russian (default locale, keeps the live site's URL) |
+| `/kk` | v1, Kazakh |
+| `/en` | v1, English |
+| `/v2`, `/kk/v2`, `/en/v2` | v2 in the three languages, `noindex`, not in the sitemap |
 | `/ru` | 308 redirect to `/` |
 
 Inner pages (`/kabinet-informatiki`, `/catalog`, `/services`, the 3D tours…) are **not part of this
@@ -46,12 +52,16 @@ current site. They return 404 when this app runs alone.
 ## Where things live
 
 ```
-app/(ru)/                 root layout + page for "/"
-app/(intl)/[locale]/      root layout + page for "/kk" and "/en"
+app/(ru)/                 root layout + pages for "/" and "/v2"
+app/(intl)/[locale]/      root layout + pages for "/kk", "/en", "/kk/v2", "/en/v2"
 app/global-not-found.tsx  routing-level 404 (needed for two root layouts)
-components/sections/      one file per sheet of the landing
-components/intro/         blueprint intro: boot script, timeline, line-art, component
-components/sheet.tsx      drawing-sheet primitives: ruler, heading, title block
+app/styles/               intro.css (every intro scene) and v2.css (v2 tokens)
+components/sections/      v1: one file per sheet of the landing
+components/v2/            v2: page, sections, ui (softButton, Sticker), art (classroom, icons)
+components/intro/         intro engine: boot script, controller (IntroStage), scenes/
+components/sheet.tsx      v1 drawing-sheet primitives: ruler, heading, title block
+hooks/                    useOrder70Kit: the kit tool's state, shared by v1 and v2
+lib/intro.ts              intro kinds, pools per version, random pick
 content/locales/          ru / kk / en copy, typed by content/types.ts
 content/cabinets.ts       the eight classrooms: codes, images, links
 content/order70.ts        Order No. 70 lists (generated, see below)
@@ -78,9 +88,13 @@ then `pnpm test:py && pnpm test`. Item names are shown as written in the order, 
 
 ## Intro
 
-Plays once per browser session, never with reduced motion, for automated browsers or on URLs with an
-`#anchor`. Force it with `?intro=1`, disable with `?intro=0`. Timings live in two places that must match:
-`components/intro/timeline.ts` and the «Blueprint intro» section of `app/globals.css`.
+Five intros: `blueprint` («Синька»), `pop` («Поп-ап класс»), `blocks` («Фигуры-кубики»), `pencil`
+(«Карандаш рисует»), `bell` («Школьный звонок»). v1 rotates all five, v2 the four cartoon ones
+(`lib/intro.ts`). A random one plays once per browser session per version, never the same twice in a row,
+never with reduced motion, for automated browsers or on URLs with an `#anchor`.
+
+- `?intro=pop` (any kind) plays that one, `?intro=1` a random one, `?intro=0` none.
+- Timings live in two places that must match: `components/intro/timeline.ts` and `app/styles/intro.css`.
 
 ## Before publishing
 

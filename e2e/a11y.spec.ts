@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
-test("button-styled links and buttons show a visible keyboard focus ring", async ({ page }) => {
-  await page.goto("/");
+for (const path of ["/", "/v2"]) test(`button-styled links and buttons on ${path} show a visible keyboard focus ring`, async ({ page }) => {
+  await page.goto(path);
   await page.keyboard.press("Tab");
   const offenders = await page.evaluate(() => {
     const controls = [...document.querySelectorAll<HTMLElement>('[class~="group/button"]')].filter(
@@ -20,7 +20,7 @@ test("button-styled links and buttons show a visible keyboard focus ring", async
 });
 
 /** Contrast of every visible text run against the colour actually behind it (WCAG AA). */
-for (const path of ["/", "/en"]) {
+for (const path of ["/", "/en", "/v2", "/kk/v2", "/en/v2"]) {
   test(`text on ${path} meets WCAG AA contrast`, async ({ page }) => {
     await page.goto(path);
     await page.evaluate(async () => {
