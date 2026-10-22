@@ -156,7 +156,7 @@ export const en: Dictionary = {
     text: "Equipment, furniture and materials for our learning spaces, from the brands featured in AXIS solutions.",
   },
   process: {
-    title: { lead: "From an empty room", accent: "to a world of possibilities." },
+    title: ["From an empty room", "to a world of possibilities."],
     steps: [
       {
         label: "Survey",

@@ -43,7 +43,7 @@ export const LandingPage = ({ locale }: { locale: Locale }): React.JSX.Element =
         />
         <Stats locale={locale} t={t.stats} />
         <Brands t={t.brands} />
-        <Process t={t.process} />
+        <Process t={t.process} sheet={sheet(4)} />
         <Team t={t} />
         <Faq t={t} />
         <G8 t={t.g8} />

@@ -12,7 +12,7 @@ import furniturePlanLayer from "@/assets/illustrations/room-furniture-plan.svg";
 import furnitureLayer from "@/assets/illustrations/room-furniture.svg";
 import screensLayer from "@/assets/illustrations/room-screens.svg";
 import shellLayer from "@/assets/illustrations/room-shell.svg";
-import { SectionTitle } from "@/components/section-title";
+import { SheetHeading } from "@/components/sheet";
 import type { Dictionary, ProcessStepCopy } from "@/content/types";
 import { sitePaths } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -64,17 +64,17 @@ const Step = ({ index, step, active, onActive }: StepProps): React.JSX.Element =
       <span
         aria-hidden
         className={cn(
-          "absolute top-1/2 left-0 size-3.5 -translate-x-[calc(50%-0.5px)] -translate-y-1/2 rounded-full border-2 transition-colors duration-500",
+          "absolute top-1/2 left-0 size-3 -translate-x-[calc(50%-0.5px)] -translate-y-1/2 border-2 transition-colors duration-500",
           active ? "border-brand bg-brand" : "border-line-strong bg-surface",
         )}
       />
-      <p className={cn("text-sm font-semibold transition-colors duration-500", active ? "text-brand" : "text-ink-muted")}>
-        {step.label}
+      <p className={cn("label-mono transition-colors duration-500", active ? "text-brand" : "text-ink-faint")}>
+        {String(index + 1).padStart(2, "0")} · {step.label}
       </p>
       <h3
         className={cn(
-          "mt-2 text-[clamp(1.6rem,2.6vw,2.25rem)] leading-tight font-semibold tracking-[-0.03em] transition-colors duration-500",
-          active ? "text-ink" : "text-ink/45",
+          "mt-3 text-[clamp(1.6rem,2.6vw,2.25rem)] leading-tight font-semibold tracking-[-0.03em] transition-colors duration-500",
+          active ? "text-ink" : "text-ink/40",
         )}
       >
         {step.title}
@@ -93,25 +93,26 @@ const Step = ({ index, step, active, onActive }: StepProps): React.JSX.Element =
 
 interface ProcessProps {
   t: Dictionary["process"];
+  sheet: string;
 }
 
 /**
  * "#process": an empty isometric room assembles as the four steps scroll past.
  * Survey shows dimensions, design shows the plan, delivery places furniture, installation turns it on.
  */
-export const Process = ({ t }: ProcessProps): React.JSX.Element => {
+export const Process = ({ t, sheet }: ProcessProps): React.JSX.Element => {
   const [active, setActive] = useState(0);
   const listRef = useRef<HTMLOListElement>(null);
   const { scrollYProgress } = useScroll({ target: listRef, offset: ["start center", "end center"] });
 
   return (
-    <section id="process" aria-labelledby="process-title" className="bg-surface py-20 lg:py-28">
+    <section id="process" aria-labelledby="process-title" className="border-b border-line bg-surface py-20 lg:py-28">
       <div className="container-axis">
-        <SectionTitle id="process-title" title={t.title} />
+        <SheetHeading id="process-title" sheet={sheet} title={t.title} />
 
         <div className="mt-10 grid gap-x-16 lg:mt-14 lg:grid-cols-12">
-          <div className="sticky top-(--header-height) z-10 -mx-4 bg-surface/95 px-4 pt-3 pb-4 backdrop-blur-md sm:-mx-6 sm:px-6 lg:top-[calc(var(--header-height)+2.5rem)] lg:col-span-6 lg:mx-0 lg:self-start lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
-            <figure className="bg-blueprint relative overflow-hidden rounded-card border border-line bg-paper">
+          <div className="sticky top-(--header-height) z-10 -mx-4 bg-surface px-4 pt-3 pb-4 sm:-mx-6 sm:px-6 lg:top-[calc(var(--header-height)+2.5rem)] lg:col-span-6 lg:mx-0 lg:self-start lg:p-0">
+            <figure className="bg-blueprint relative overflow-hidden border border-line bg-paper">
               <div role="img" aria-label={t.illustrationAlt} className="relative mx-auto aspect-[880/650] max-h-[34vh] lg:max-h-none">
                 <Layer src={shellLayer} visible />
                 <Layer src={dimsLayer} visible={active === 0} />
@@ -121,20 +122,20 @@ export const Process = ({ t }: ProcessProps): React.JSX.Element => {
                 <Layer src={boardLayer} visible={active >= 3} rise={10} />
                 <Layer src={screensLayer} visible={active >= 3} delay={0.25} />
               </div>
-              <figcaption className="flex border-t border-line bg-surface/80">
+              <figcaption className="grid grid-cols-4 border-t border-line bg-surface">
                 {t.steps.map((step, index) => (
                   <span
                     key={step.label}
                     className={cn(
-                      "relative flex-1 truncate px-2 py-3 text-center text-xs font-semibold transition-colors duration-500 sm:text-sm",
-                      index === active ? "text-brand" : "text-ink-muted",
+                      "label-mono relative truncate px-2 py-3.5 text-center transition-colors duration-500",
+                      index === active ? "text-brand" : "text-ink-faint",
                     )}
                   >
                     {step.label}
                     {index === active && (
                       <motion.span
                         layoutId="process-step-underline"
-                        className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-brand"
+                        className="absolute inset-x-0 bottom-0 h-0.5 bg-brand"
                         transition={{ duration: 0.5, ease }}
                       />
                     )}
@@ -146,20 +147,13 @@ export const Process = ({ t }: ProcessProps): React.JSX.Element => {
 
           <div className="relative lg:col-span-6">
             <div aria-hidden className="absolute top-0 bottom-0 left-0 w-px bg-line" />
-            <motion.div
-              aria-hidden
-              className="absolute top-0 bottom-0 left-0 w-px origin-top bg-brand"
-              style={{ scaleY: scrollYProgress }}
-            />
+            <motion.div aria-hidden className="absolute top-0 bottom-0 left-0 w-px origin-top bg-brand" style={{ scaleY: scrollYProgress }} />
             <ol ref={listRef}>
               {t.steps.map((step, index) => (
                 <Step key={step.label} index={index} step={step} active={index === active} onActive={setActive} />
               ))}
             </ol>
-            <a
-              href={sitePaths.services}
-              className="group mt-4 ml-10 inline-flex items-center gap-2 font-semibold text-brand lg:ml-14"
-            >
+            <a href={sitePaths.services} className="group mt-4 ml-10 inline-flex items-center gap-2 font-medium text-brand lg:ml-14">
               {t.more}
               <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
             </a>

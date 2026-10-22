@@ -133,7 +133,7 @@ export interface Dictionary {
     text: string;
   };
   process: {
-    title: SplitTitle;
+    title: Lines;
     steps: readonly [ProcessStepCopy, ProcessStepCopy, ProcessStepCopy, ProcessStepCopy];
     more: string;
     illustrationAlt: string;
