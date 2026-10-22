@@ -56,7 +56,7 @@ export const Notes = ({ t, sheet }: NotesProps): React.JSX.Element => (
                 className="flex h-full items-center justify-between gap-3 bg-surface px-4 py-3.5 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-white"
               >
                 <span>
-                  <span className="mr-2 font-mono text-[11px] opacity-50">{cabinets[id].code}</span>
+                  <span className="mr-2 font-mono text-[11px] text-ink-faint">{cabinets[id].code}</span>
                   {t.cabinets.items[id].directoryLabel}
                 </span>
                 <ArrowUpRight aria-hidden className="size-4 shrink-0" />

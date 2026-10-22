@@ -20,11 +20,34 @@ test("tick what the school has and send the rest", async ({ page }) => {
 
   await tool.getByRole("tab", { name: /Информатика/ }).click();
   await expect(tool.getByTestId("order70-have")).toHaveText("0");
+  await boxes.nth(0).check();
   await tool.getByRole("tab", { name: /Мастерская труда/ }).click();
   await expect(tool.getByTestId("order70-have")).toHaveText("3");
 
   await tool.getByRole("button", { name: /Сбросить/ }).click();
   await expect(tool.getByTestId("order70-have")).toHaveText("0");
+  await tool.getByRole("tab", { name: /Информатика/ }).click();
+  await expect(tool.getByTestId("order70-have")).toHaveText("1");
+});
+
+test("on phones the floating WhatsApp button never covers the tool", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/#order70");
+  const tool = page.locator("#order70");
+  await tool.getByRole("tabpanel").getByRole("checkbox").nth(0).check();
+  await page.mouse.wheel(0, 300);
+  await page.waitForTimeout(600);
+  const reset = tool.getByRole("button", { name: /Сбросить/ });
+  await expect(reset).toBeInViewport();
+  const covered = await reset.evaluate((button) => {
+    const box = button.getBoundingClientRect();
+    const y = box.top + box.height / 2;
+    return [box.left + 2, box.left + box.width / 2, box.right - 2].filter((x) => {
+      const hit = document.elementFromPoint(x, y);
+      return hit === null || !button.contains(hit);
+    });
+  });
+  expect(covered).toEqual([]);
 });
 
 test("tabs follow the arrow keys", async ({ page }) => {

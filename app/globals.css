@@ -14,7 +14,7 @@
   --ink-deep: #0b1220;
   --ink-2: #3a4352;
   --ink-muted: #5b6472;
-  --ink-faint: #8a93a1;
+  --ink-faint: #646d7b;
   --brand: #3059df;
   --brand-hover: #2449c4;
   --brand-soft: #e9eefc;
@@ -218,7 +218,8 @@
   position: fixed;
   inset: 0;
   z-index: 70;
-  /* Failsafe exit when the app's JS never takes over (it sets data-js and disables this). */
+  /* Failsafe exit (INTRO.failsafeAt → failsafeMs) when the app's JS never takes over; the
+     component sets data-js to disable it only if it arrives before the exit starts. */
   animation: intro-out 0.4s ease-in 4s both;
 }
 html[data-intro] .intro {

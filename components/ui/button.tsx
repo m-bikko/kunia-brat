@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
  * Use `buttonVariants()` on links (most CTAs are links) or `<Button>` for real buttons.
  */
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center gap-3 border border-transparent font-medium whitespace-nowrap transition-[background-color,border-color,color,transform] duration-200 outline-none select-none active:translate-y-px disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button inline-flex shrink-0 items-center justify-center gap-3 border border-transparent font-medium whitespace-nowrap transition-[background-color,border-color,color,transform] duration-200 select-none active:translate-y-px disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {

@@ -18,6 +18,8 @@ declare global {
   interface Window {
     /** performance.now() when the boot script started the intro. */
     __axisIntroStart?: number;
+    /** The boot script's failsafe timer; cleared once this component runs the intro. */
+    __axisIntroTimer?: number;
   }
 }
 
@@ -47,6 +49,12 @@ export const BlueprintIntro = ({ t }: { t: Dictionary["intro"] }): React.JSX.Ele
     const root = rootRef.current;
     if (!root || html.getAttribute("data-intro") !== "play") return;
 
+    // JS arrived after the CSS failsafe exit began: let it finish (the boot timer ends the intro)
+    // instead of cancelling it, which would snap the faded overlay back.
+    const elapsed = performance.now() - (window.__axisIntroStart ?? performance.now());
+    if (elapsed >= INTRO.failsafeAt) return;
+
+    window.clearTimeout(window.__axisIntroTimer);
     root.dataset.js = "";
     const controller = new AbortController();
     const timers: number[] = [];
@@ -84,8 +92,9 @@ export const BlueprintIntro = ({ t }: { t: Dictionary["intro"] }): React.JSX.Ele
       }
     };
 
-    const elapsed = performance.now() - (window.__axisIntroStart ?? performance.now());
     timers.push(window.setTimeout(fly, Math.max(0, INTRO.flightAt - elapsed)));
+    // This run now owns the end; keep a failsafe of its own in case the flight never completes.
+    timers.push(window.setTimeout(end, Math.max(0, INTRO.flightAt + INTRO.flightMs + 1000 - elapsed)));
 
     const onKey = (event: KeyboardEvent): void => {
       if (event.key === "Escape") skip();

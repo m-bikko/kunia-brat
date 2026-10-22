@@ -74,7 +74,7 @@ const Step = ({ index, step, active, onActive }: StepProps): React.JSX.Element =
       <h3
         className={cn(
           "mt-3 text-[clamp(1.6rem,2.6vw,2.25rem)] leading-tight font-semibold tracking-[-0.03em] transition-colors duration-500",
-          active ? "text-ink" : "text-ink/40",
+          active ? "text-ink" : "text-ink-faint",
         )}
       >
         {step.title}
@@ -82,7 +82,7 @@ const Step = ({ index, step, active, onActive }: StepProps): React.JSX.Element =
       <p
         className={cn(
           "mt-4 max-w-[46ch] text-base leading-relaxed text-pretty transition-colors duration-500 lg:text-lg",
-          active ? "text-ink-muted" : "text-ink-muted/60",
+          active ? "text-ink-muted" : "text-ink-faint",
         )}
       >
         {step.text}
