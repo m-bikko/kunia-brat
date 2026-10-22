@@ -1,5 +1,4 @@
 import type { CabinetId } from "@/content/cabinets";
-import type { StatId } from "@/content/stats";
 import type { PluralForms } from "@/lib/i18n";
 import type { QuoteTemplates } from "@/lib/quote-message";
 
@@ -112,10 +111,6 @@ export interface Dictionary {
     sourceNote: string;
     message: QuoteTemplates;
   };
-  stats: {
-    label: string;
-    items: Record<StatId, PluralForms>;
-  };
   cabinets: {
     tour: string;
     quote: string;
@@ -129,8 +124,16 @@ export interface Dictionary {
     previewCaption: string;
   };
   brands: {
-    title: SplitTitle;
+    title: Lines;
     text: string;
+    /** Last cell of the logo grid. */
+    more: string;
+  };
+  facts: {
+    label: string;
+    items: Record<"directions" | "positions" | "brands", PluralForms>;
+    workshopValue: string;
+    workshopLabel: string;
   };
   process: {
     title: Lines;
@@ -139,7 +142,7 @@ export interface Dictionary {
     illustrationAlt: string;
   };
   team: {
-    title: SplitTitle;
+    title: Lines;
     workshop: { kicker: string; title: string; text: string; alt: string };
     store: { kicker: string; title: string; text: string; alt: string };
     teamTitle: string;

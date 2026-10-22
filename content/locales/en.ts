@@ -81,15 +81,6 @@ export const en: Dictionary = {
       more: "and {count} more",
     },
   },
-  stats: {
-    label: "AXIS in numbers",
-    items: {
-      classrooms: { one: "classroom fitted out", other: "classrooms fitted out" },
-      schools: { one: "client school", other: "client schools" },
-      directions: { one: "subject area", other: "subject areas" },
-      brands: { one: "manufacturer brand", other: "manufacturer brands" },
-    },
-  },
   cabinets: {
     tour: "3D tour",
     quote: "Get a quote",
@@ -152,8 +143,19 @@ export const en: Dictionary = {
     previewCaption: "concept visualization",
   },
   brands: {
-    title: { lead: "Brands we work with.", accent: "For every classroom." },
+    title: ["Brands", "in our classrooms."],
     text: "Equipment, furniture and materials for our learning spaces, from the brands featured in AXIS solutions.",
+    more: "Everything else is sourced to the specification",
+  },
+  facts: {
+    label: "AXIS in facts",
+    items: {
+      directions: { one: "subject area", other: "subject areas" },
+      positions: { one: "item under Order No. 70", other: "items under Order No. 70" },
+      brands: { one: "manufacturer brand", other: "manufacturer brands" },
+    },
+    workshopValue: "Own",
+    workshopLabel: "furniture workshop",
   },
   process: {
     title: ["From an empty room", "to a world of possibilities."],
@@ -183,7 +185,7 @@ export const en: Dictionary = {
     illustrationAlt: "Architectural illustration: a computer science classroom assembled step by step",
   },
   team: {
-    title: { lead: "Behind every classroom", accent: "is our team." },
+    title: ["Behind every classroom", "is our team."],
     workshop: {
       kicker: "We make",
       title: "Furniture workshop",

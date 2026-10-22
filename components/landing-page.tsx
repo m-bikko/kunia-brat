@@ -1,16 +1,15 @@
 import { BlueprintIntro } from "@/components/intro/blueprint-intro";
 import { JsonLd } from "@/components/json-ld";
-import { Brands } from "@/components/sections/brands";
 import { CabinetIndex } from "@/components/sections/cabinet-index";
 import { ContactCta } from "@/components/sections/contact-cta";
 import { Faq } from "@/components/sections/faq";
+import { FactsSuppliers } from "@/components/sections/facts-suppliers";
 import { G8 } from "@/components/sections/g8";
 import { HeroSheet } from "@/components/sections/hero-sheet";
 import { Order70Tool } from "@/components/sections/order70-tool";
 import { Process } from "@/components/sections/process";
+import { Production } from "@/components/sections/production";
 import { Stages } from "@/components/sections/stages";
-import { Stats } from "@/components/sections/stats";
-import { Team } from "@/components/sections/team";
 import { SheetRuler, sheetTag } from "@/components/sheet";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -41,10 +40,9 @@ export const LandingPage = ({ locale }: { locale: Locale }): React.JSX.Element =
           quoteTemplate={t.contact.messageTemplate}
           sheet={sheet(3)}
         />
-        <Stats locale={locale} t={t.stats} />
-        <Brands t={t.brands} />
         <Process t={t.process} sheet={sheet(4)} />
-        <Team t={t} />
+        <Production t={t} sheet={sheet(5)} />
+        <FactsSuppliers locale={locale} t={t} sheet={sheet(6)} />
         <Faq t={t} />
         <G8 t={t.g8} />
         <ContactCta t={t.contact} address={t.footer.address} cabinetItems={t.cabinets.items} />
