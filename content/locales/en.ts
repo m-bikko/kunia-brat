@@ -49,6 +49,38 @@ export const en: Dictionary = {
     axisX: "axis X",
     axisY: "axis Y",
   },
+  stages: {
+    label: "How we work",
+    items: [
+      { label: "Survey", text: "We study the room and your goals" },
+      { label: "Design", text: "Layout and kit to the standard" },
+      { label: "Delivery", text: "Furniture from our workshop, plus equipment" },
+      { label: "Installation", text: "We connect everything and start the lesson" },
+    ],
+  },
+  order70: {
+    title: ["Classroom kit", "under Order No. 70"],
+    text: "Pick a classroom and tick what the school already has. We will source the rest, build it in our workshop, deliver and install it.",
+    tabsLabel: "Classroom",
+    itemsUnit: "items",
+    total: "Total",
+    have: "In place",
+    need: "To source",
+    haveBadge: "in place",
+    send: "Send for a quote",
+    reset: "Clear",
+    hint: "WhatsApp opens with the list ready",
+    previewCaption: "concept visualization",
+    sourceNote: "Items are listed as worded in Order No. 70. The final kit is confirmed after the survey.",
+    message: {
+      intro: "Hello! Please prepare a quote for: {cabinet}.",
+      total: "Order No. 70 lists {total} items.",
+      have: "Already in place ({have}): {list}.",
+      haveNone: "We need the full kit.",
+      need: "To source: {need} items.",
+      more: "and {count} more",
+    },
+  },
   stats: {
     label: "AXIS in numbers",
     items: {

@@ -34,6 +34,8 @@ export type CabinetCategory = "technology" | "creativity" | "craft" | "languages
 export interface Cabinet {
   id: CabinetId;
   category: CabinetCategory;
+  /** Three-letter index code shown in the drawing index, e.g. "INF". */
+  code: string;
   /** Concept render (not a photo of a finished project). */
   image: StaticImageData;
   /** Existing detail page on axisgroup.kz. */
@@ -46,6 +48,7 @@ export const cabinets: Record<CabinetId, Cabinet> = {
   informatics: {
     id: "informatics",
     category: "technology",
+    code: "INF",
     image: informaticsImage,
     href: "/kabinet-informatiki",
     tourHref: "/virtual-classroom",
@@ -53,6 +56,7 @@ export const cabinets: Record<CabinetId, Cabinet> = {
   art: {
     id: "art",
     category: "creativity",
+    code: "ART",
     image: artImage,
     href: "/art-kabinet",
     tourHref: "/art-classroom",
@@ -60,6 +64,7 @@ export const cabinets: Record<CabinetId, Cabinet> = {
   sewing: {
     id: "sewing",
     category: "craft",
+    code: "SEW",
     image: sewingImage,
     href: "/shveynaya-masterskaya",
     tourHref: "/sewing-classroom",
@@ -67,30 +72,35 @@ export const cabinets: Record<CabinetId, Cabinet> = {
   pottery: {
     id: "pottery",
     category: "creativity",
+    code: "POT",
     image: potteryImage,
     href: "/goncharnaya-studiya",
   },
   workshop: {
     id: "workshop",
     category: "craft",
+    code: "WRK",
     image: workshopImage,
     href: "/masterskaya-truda",
   },
   kazakh: {
     id: "kazakh",
     category: "languages",
+    code: "KAZ",
     image: kazakhImage,
     href: "/kabinet-kazakhskogo-yazyka",
   },
   russian: {
     id: "russian",
     category: "languages",
+    code: "RUS",
     image: russianImage,
     href: "/kabinet-russkogo-yazyka",
   },
   english: {
     id: "english",
     category: "languages",
+    code: "ENG",
     image: englishImage,
     href: "/kabinet-angliyskogo-yazyka",
   },

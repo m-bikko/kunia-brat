@@ -6,11 +6,13 @@ import { ContactCta } from "@/components/sections/contact-cta";
 import { Faq } from "@/components/sections/faq";
 import { G8 } from "@/components/sections/g8";
 import { HeroSheet } from "@/components/sections/hero-sheet";
+import { Order70Tool } from "@/components/sections/order70-tool";
 import { Process } from "@/components/sections/process";
+import { Stages } from "@/components/sections/stages";
 import { Showroom, type ShowroomTour } from "@/components/sections/showroom";
 import { Stats } from "@/components/sections/stats";
 import { Team } from "@/components/sections/team";
-import { SheetRuler } from "@/components/sheet";
+import { SheetRuler, sheetTag } from "@/components/sheet";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { WhatsappFab } from "@/components/whatsapp-fab";
@@ -35,6 +37,8 @@ export const LandingPage = ({ locale }: { locale: Locale }): React.JSX.Element =
       <SiteHeader locale={locale} t={t.nav} />
       <main id="main">
         <HeroSheet locale={locale} t={t} />
+        <Stages t={t.stages} />
+        <Order70Tool t={t.order70} items={t.cabinets.items} sheet={sheetTag(t.stamp, 2)} />
         <Stats locale={locale} t={t.stats} />
         <Cabinets t={t} />
         <Showroom t={t.showroom} tours={tours} />

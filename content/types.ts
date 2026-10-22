@@ -1,6 +1,7 @@
 import type { CabinetCategory, CabinetId } from "@/content/cabinets";
 import type { StatId } from "@/content/stats";
 import type { PluralForms } from "@/lib/i18n";
+import type { QuoteTemplates } from "@/lib/quote-message";
 
 /** Two-part headline: the second part is rendered in the brand accent. */
 export interface SplitTitle {
@@ -22,6 +23,11 @@ export interface CabinetCopy {
   features: readonly [string, string, string];
   /** Anchor text for the SEO directory: "Оснащение кабинета ...". */
   directoryLabel: string;
+}
+
+export interface StageCopy {
+  label: string;
+  text: string;
 }
 
 export interface ProcessStepCopy {
@@ -85,6 +91,26 @@ export interface Dictionary {
     callouts: readonly [string, string, string];
     axisX: string;
     axisY: string;
+  };
+  stages: {
+    label: string;
+    items: readonly [StageCopy, StageCopy, StageCopy, StageCopy];
+  };
+  order70: {
+    title: Lines;
+    text: string;
+    tabsLabel: string;
+    itemsUnit: string;
+    total: string;
+    have: string;
+    need: string;
+    haveBadge: string;
+    send: string;
+    reset: string;
+    hint: string;
+    previewCaption: string;
+    sourceNote: string;
+    message: QuoteTemplates;
   };
   stats: {
     label: string;
