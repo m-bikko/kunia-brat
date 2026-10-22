@@ -11,10 +11,10 @@ export type SiteVersion = "v1" | "v2";
 export const isIntroKind = (value: string | null): value is IntroKind =>
   value !== null && (introKinds as readonly string[]).includes(value);
 
-/** Which intros each version rotates. Kinds join the pools as their scenes are built. */
+/** Which intros each version rotates: v1 keeps its blueprint, v2 only the cartoon ones. */
 export const introPools: Record<SiteVersion, readonly IntroKind[]> = {
-  v1: ["blueprint", "pop", "blocks", "pencil"],
-  v2: ["pop", "blocks", "pencil"],
+  v1: ["blueprint", "pop", "blocks", "pencil", "bell"],
+  v2: ["pop", "blocks", "pencil", "bell"],
 };
 
 /** How an intro hands over to the page: fly into the first screen, or reveal it (its own CSS exit). */

@@ -456,3 +456,68 @@ html[data-intro-kind="bell"] .intro-scene[data-kind="bell"] {
   }
 }
 
+/* ---------- Intro: bell «Школьный звонок» (reveal, no flight) ---------- */
+/* Nothing flies in: the first screen's art stays visible while the backdrop shrinks away. */
+html[data-intro-kind="bell"] [data-intro-target] {
+  visibility: visible;
+}
+.intro-bell-reveal {
+  transform-origin: 50% 40%;
+  animation: intro-bell-shrink 0.8s cubic-bezier(0.55, 0, 0.3, 1) 2.8s both;
+}
+/* Just big enough to cover the screen from the bell's point, so the page opens up as soon as it shrinks. */
+.intro-bell-disc {
+  --r: calc(hypot(50vw, 60vh) + 4px);
+  left: 50%;
+  top: 40%;
+  width: calc(var(--r) * 2);
+  height: calc(var(--r) * 2);
+  translate: -50% -50%;
+}
+html[data-intro-kind="bell"] .intro [data-intro-chrome] {
+  animation: intro-fade-out 0.3s ease 2.8s both;
+}
+.intro-bell {
+  transform-origin: 50% 8%;
+  animation:
+    intro-pop-in 0.5s var(--ease-spring) 0.1s both,
+    intro-bell-swing 1s ease-in-out 0.62s;
+}
+.intro-bell-wave {
+  left: 50%;
+  top: 40%;
+  width: clamp(9rem, 22vw, 15rem);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  animation: intro-bell-ring 1.2s cubic-bezier(0.2, 0.7, 0.3, 1) var(--at, 0.6s) both;
+}
+@keyframes intro-bell-swing {
+  20% {
+    transform: rotate(16deg);
+  }
+  45% {
+    transform: rotate(-13deg);
+  }
+  70% {
+    transform: rotate(8deg);
+  }
+  88% {
+    transform: rotate(-4deg);
+  }
+}
+@keyframes intro-bell-ring {
+  from {
+    opacity: 1;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 0;
+    transform: scale(3.2);
+  }
+}
+@keyframes intro-bell-shrink {
+  to {
+    transform: scale(0);
+  }
+}
+

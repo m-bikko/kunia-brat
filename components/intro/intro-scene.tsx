@@ -1,3 +1,4 @@
+import { BellScene } from "@/components/intro/scenes/bell-scene";
 import { BlocksScene } from "@/components/intro/scenes/blocks-scene";
 import { BlueprintScene } from "@/components/intro/scenes/blueprint-scene";
 import { PencilScene } from "@/components/intro/scenes/pencil-scene";
@@ -5,7 +6,7 @@ import { PopScene } from "@/components/intro/scenes/pop-scene";
 import type { IntroKind } from "@/lib/intro";
 
 /** The markup of one intro kind. Every scene is a server-rendered CSS timeline (app/styles/intro.css). */
-export const IntroScene = ({ kind, caption }: { kind: IntroKind; caption: string }): React.JSX.Element | null => {
+export const IntroScene = ({ kind, caption }: { kind: IntroKind; caption: string }): React.JSX.Element => {
   switch (kind) {
     case "blueprint":
       return <BlueprintScene caption={caption} />;
@@ -15,7 +16,7 @@ export const IntroScene = ({ kind, caption }: { kind: IntroKind; caption: string
       return <BlocksScene caption={caption} />;
     case "pencil":
       return <PencilScene caption={caption} />;
-    default:
-      return null;
+    case "bell":
+      return <BellScene caption={caption} />;
   }
 };
