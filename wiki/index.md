@@ -5,6 +5,7 @@
 - [[i18n]] — словари ru/kk/en, плюрализация, тире, шрифт для казахских букв
 - [[design-system]] — язык «Чертёж»: токены, приёмы листа, движение
 - [[build-pitfalls]] — грабли Next 16 / Turbopack / cacheComponents
+- [[deployment]] — GitHub → Vercel, проверка перед пушем и после
 
 ## Entities
 - [[landing-sections]] — восемь листов лендинга и что делает каждый
