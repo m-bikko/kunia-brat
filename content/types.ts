@@ -1,4 +1,4 @@
-import type { CabinetCategory, CabinetId } from "@/content/cabinets";
+import type { CabinetId } from "@/content/cabinets";
 import type { StatId } from "@/content/stats";
 import type { PluralForms } from "@/lib/i18n";
 import type { QuoteTemplates } from "@/lib/quote-message";
@@ -117,24 +117,16 @@ export interface Dictionary {
     items: Record<StatId, PluralForms>;
   };
   cabinets: {
-    title: SplitTitle;
-    lead: string;
-    openKit: string;
     tour: string;
     quote: string;
-    categories: Record<CabinetCategory, string>;
     items: Record<CabinetId, CabinetCopy>;
-    languagesTitle: string;
-    languagesText: string;
-    languagesLinks: Record<"kazakh" | "russian" | "english", string>;
   };
-  showroom: {
-    eyebrow: string;
-    title: SplitTitle;
-    text: string;
-    tabsLabel: string;
-    enter: string;
+  index: {
+    title: Lines;
     hint: string;
+    columns: { code: string; name: string; key: string; items: string; action: string };
+    itemsUnit: string;
+    previewCaption: string;
   };
   brands: {
     title: SplitTitle;

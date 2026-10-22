@@ -91,17 +91,8 @@ export const en: Dictionary = {
     },
   },
   cabinets: {
-    title: { lead: "Every talent", accent: "deserves its own space." },
-    lead: "Eight subject areas. Choose what your students will create, and we will take care of the rest.",
-    openKit: "See the kit",
     tour: "3D tour",
     quote: "Get a quote",
-    categories: {
-      technology: "Technology",
-      creativity: "Creativity",
-      craft: "Craft",
-      languages: "Languages",
-    },
     items: {
       informatics: {
         name: "Computer science",
@@ -152,21 +143,13 @@ export const en: Dictionary = {
         directoryLabel: "English language classroom fit-out",
       },
     },
-    languagesTitle: "Language classrooms",
-    languagesText: "Kazakh, Russian and English: student places, an interactive panel, dictionaries and resources.",
-    languagesLinks: {
-      kazakh: "Kazakh",
-      russian: "Russian",
-      english: "English",
-    },
   },
-  showroom: {
-    eyebrow: "See it first",
-    title: { lead: "Ideas", accent: "take shape." },
-    text: "Choose a subject, look at the equipment and walk through your future classroom in 3D.",
-    tabsLabel: "Choose a classroom",
-    enter: "Enter 3D",
-    hint: "Concept visualization. The 3D tour runs in the browser, nothing to install.",
+  index: {
+    title: ["Eight classrooms.", "One contractor."],
+    hint: "Hover a row to preview the classroom concept.",
+    columns: { code: "Code", name: "Classroom", key: "Key item", items: "Order No. 70", action: "Action" },
+    itemsUnit: "items",
+    previewCaption: "concept visualization",
   },
   brands: {
     title: { lead: "Brands we work with.", accent: "For every classroom." },

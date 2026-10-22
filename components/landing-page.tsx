@@ -1,7 +1,7 @@
 import { BlueprintIntro } from "@/components/intro/blueprint-intro";
 import { JsonLd } from "@/components/json-ld";
 import { Brands } from "@/components/sections/brands";
-import { Cabinets } from "@/components/sections/cabinets";
+import { CabinetIndex } from "@/components/sections/cabinet-index";
 import { ContactCta } from "@/components/sections/contact-cta";
 import { Faq } from "@/components/sections/faq";
 import { G8 } from "@/components/sections/g8";
@@ -9,25 +9,19 @@ import { HeroSheet } from "@/components/sections/hero-sheet";
 import { Order70Tool } from "@/components/sections/order70-tool";
 import { Process } from "@/components/sections/process";
 import { Stages } from "@/components/sections/stages";
-import { Showroom, type ShowroomTour } from "@/components/sections/showroom";
 import { Stats } from "@/components/sections/stats";
 import { Team } from "@/components/sections/team";
 import { SheetRuler, sheetTag } from "@/components/sheet";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { WhatsappFab } from "@/components/whatsapp-fab";
-import { cabinets, tourCabinetIds } from "@/content/cabinets";
 import { getDictionary } from "@/content/dictionaries";
 import type { Locale } from "@/lib/i18n";
 
 /** The whole landing for one locale. */
 export const LandingPage = ({ locale }: { locale: Locale }): React.JSX.Element => {
   const t = getDictionary(locale);
-
-  const tours: ShowroomTour[] = tourCabinetIds.flatMap((id) => {
-    const { tourHref, image } = cabinets[id];
-    return tourHref ? [{ id, name: t.cabinets.items[id].name, image, tourHref }] : [];
-  });
+  const sheet = (n: number): string => sheetTag(t.stamp, n);
 
   return (
     <>
@@ -38,10 +32,16 @@ export const LandingPage = ({ locale }: { locale: Locale }): React.JSX.Element =
       <main id="main">
         <HeroSheet locale={locale} t={t} />
         <Stages t={t.stages} />
-        <Order70Tool t={t.order70} items={t.cabinets.items} sheet={sheetTag(t.stamp, 2)} />
+        <Order70Tool t={t.order70} items={t.cabinets.items} sheet={sheet(2)} />
+        <CabinetIndex
+          copy={t.index}
+          items={t.cabinets.items}
+          tour={t.cabinets.tour}
+          quote={t.cabinets.quote}
+          quoteTemplate={t.contact.messageTemplate}
+          sheet={sheet(3)}
+        />
         <Stats locale={locale} t={t.stats} />
-        <Cabinets t={t} />
-        <Showroom t={t.showroom} tours={tours} />
         <Brands t={t.brands} />
         <Process t={t.process} />
         <Team t={t} />
