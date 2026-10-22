@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "./styles/intro.css";
+@import "./styles/v2.css";
 
 /*
  * AXIS "drawing sheet" tokens.

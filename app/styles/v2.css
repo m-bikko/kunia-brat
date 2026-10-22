@@ -1,0 +1,51 @@
+/* ---------- AXIS v2 «Мягкая»: tokens and base rules. They act inside `.v2` only; v1 is untouched. ---------- */
+:root {
+  --navy: #1b2559;
+  --navy-muted: #4b5584;
+  --sky: #dfe8ff;
+  --cloud: #f4f7ff;
+  --sun: #ffc845;
+  --coral: #ff7f66;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-navy-muted: var(--navy-muted);
+  --color-sky: var(--sky);
+  --color-cloud: var(--cloud);
+  --color-sun: var(--sun);
+  --color-coral: var(--coral);
+
+  --radius-card: 28px;
+  --radius-tile: 20px;
+  --radius-field: 14px;
+
+  /* "Sticker": solid offset shadow under a 2.5px navy outline. */
+  --shadow-sticker: 0 6px 0 var(--navy);
+  --shadow-sticker-sm: 0 3px 0 var(--navy);
+
+  --font-soft: var(--font-nunito), ui-rounded, system-ui, sans-serif;
+}
+
+@layer base {
+  body:has(.v2) {
+    background-color: var(--cloud);
+  }
+  .v2 {
+    font-family: var(--font-nunito), ui-rounded, system-ui, sans-serif;
+    background-color: var(--cloud);
+    color: var(--navy);
+  }
+  .v2 ::selection {
+    background: color-mix(in oklab, var(--sun) 55%, transparent);
+  }
+}
+
+/* Unlayered on purpose: no utility may hide the focus ring. Yellow on navy surfaces. */
+.v2 :focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+}
+.v2 .on-navy :focus-visible {
+  outline-color: var(--sun);
+}

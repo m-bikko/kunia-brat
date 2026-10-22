@@ -274,4 +274,7 @@ export const en: Dictionary = {
     text: "It may have moved. The home page lists every classroom we fit out and how to reach us.",
     home: "Back to home",
   },
+  v2: {
+    menuLabel: "Menu",
+  },
 };

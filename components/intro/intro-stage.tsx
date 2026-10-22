@@ -128,7 +128,11 @@ export const IntroStage = ({
         type="button"
         data-intro-chrome
         onClick={() => skipRef.current()}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-ink/85 px-4 py-2.5 font-mono text-[11px] tracking-[0.08em] text-white uppercase transition-colors hover:bg-ink"
+        className={
+          version === "v1"
+            ? "absolute bottom-8 left-1/2 -translate-x-1/2 bg-ink/85 px-4 py-2.5 font-mono text-[11px] tracking-[0.08em] text-white uppercase transition-colors hover:bg-ink"
+            : "absolute bottom-8 left-1/2 -translate-x-1/2 rounded-full border-[2.5px] border-white bg-white/10 px-5 py-2 text-sm font-extrabold text-white transition-colors hover:bg-white/20"
+        }
       >
         {t.skip}
       </button>

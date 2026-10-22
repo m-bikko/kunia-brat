@@ -182,4 +182,8 @@ export interface Dictionary {
     text: string;
     home: string;
   };
+  /** Strings that only the soft v2 landing uses; everything else is shared with v1. */
+  v2: {
+    menuLabel: string;
+  };
 }

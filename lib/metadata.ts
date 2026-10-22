@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { getDictionary } from "@/content/dictionaries";
 import { defaultLocale, localePath, locales, openGraphLocale, type Locale } from "@/lib/i18n";
 import { site } from "@/lib/site";
+import { versionPath } from "@/lib/versions";
 
 /** hreflang map shared by every locale: ru at "/", kk at "/kk", en at "/en". */
 const languageAlternates = (): Record<string, string> => {
@@ -48,6 +49,18 @@ export const buildMetadata = (locale: Locale): Metadata => {
       googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
     },
     formatDetection: { telephone: false },
+  };
+};
+
+/** v2 is a design candidate next to v1: same copy, closed to indexing, no hreflang alternates. */
+export const buildV2Metadata = (locale: Locale): Metadata => {
+  const base = buildMetadata(locale);
+  const path = versionPath(locale, "v2");
+  return {
+    ...base,
+    alternates: { canonical: path },
+    openGraph: { ...base.openGraph, url: path },
+    robots: { index: false, follow: false },
   };
 };
 
