@@ -40,8 +40,9 @@ const desks: readonly DeskSpec[] = [
 /**
  * The v2 cartoon classroom, front view (viewBox 640×440): wall with a window and a clock, the brand
  * interactive panel, a bookcase with a globe, the teacher's desk and six student desks. Navy 2.5px
- * outlines, flat palette fills, no people. Every part is a `<g data-part>` so intro scenes can animate
- * them with CSS; the first screen, the process block and the intros all draw this one component.
+ * outlines, flat palette fills, no people. Every part is a `<g data-part>` (desks also carry `--i`, their
+ * order) so intro scenes can animate them with CSS; the first screen, the process block and the intros
+ * all draw this one component.
  */
 export const ClassroomArt = ({ stage = 3, outline = false, className, ...rest }: ClassroomArtProps): React.JSX.Element => {
   const fill = (color: string): string => (outline ? "none" : color);
@@ -140,8 +141,8 @@ export const ClassroomArt = ({ stage = 3, outline = false, className, ...rest }:
       )}
 
       {stage >= 1 &&
-        desks.map(({ x, y, w, chair, item }) => (
-          <g key={`${x}-${y}`} data-part="desk">
+        desks.map(({ x, y, w, chair, item }, index) => (
+          <g key={`${x}-${y}`} data-part="desk" style={{ "--i": index }}>
             <rect {...shape} x={x + w / 2 - 22} y={y - 26} width={44} height={32} rx={14} fill={fill(chair)} />
             <rect {...shape} x={x + 8} y={y + 14} width={9} height={30} rx={4} fill={fill("#ffffff")} />
             <rect {...shape} x={x + w - 17} y={y + 14} width={9} height={30} rx={4} fill={fill("#ffffff")} />

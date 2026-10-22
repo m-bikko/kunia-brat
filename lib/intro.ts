@@ -13,8 +13,8 @@ export const isIntroKind = (value: string | null): value is IntroKind =>
 
 /** Which intros each version rotates. Kinds join the pools as their scenes are built. */
 export const introPools: Record<SiteVersion, readonly IntroKind[]> = {
-  v1: ["blueprint"],
-  v2: [],
+  v1: ["blueprint", "pop"],
+  v2: ["pop"],
 };
 
 /** How an intro hands over to the page: fly into the first screen, or reveal it (its own CSS exit). */
