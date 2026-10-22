@@ -12,6 +12,16 @@ export const en: Dictionary = {
       "Furniture and equipment for school classrooms: computer science, art, languages, pottery, technology and sewing workshops. Specification, design, delivery and installation.",
     ogImageAlt: "AXIS concept visualization of a Kazakh language classroom",
   },
+  stamp: {
+    object: "Object",
+    objectValue: "Computer science classroom",
+    stage: "Stage",
+    stageValue: "Sketch",
+    project: "Project",
+    projectValue: "AXIS · Almaty",
+    sheet: "Sheet",
+    sheetTag: "Sheet {n}",
+  },
   nav: {
     tagline: "Building spaces for learning",
     skipToContent: "Skip to content",

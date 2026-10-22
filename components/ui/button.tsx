@@ -4,27 +4,24 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 /**
- * AXIS button styles. Use `buttonVariants()` on links (most CTAs here are links),
- * or `<Button>` for real buttons. Controls share the 12px `rounded-control` radius.
+ * AXIS button styles: sharp, flat, label left / icon right when stretched.
+ * Use `buttonVariants()` on links (most CTAs are links) or `<Button>` for real buttons.
  */
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center gap-2 rounded-control border border-transparent font-semibold whitespace-nowrap transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-(--ease-out-expo) outline-none select-none active:translate-y-px disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[1.1em]",
+  "group/button inline-flex shrink-0 items-center justify-center gap-3 border border-transparent font-medium whitespace-nowrap transition-[background-color,border-color,color,transform] duration-200 outline-none select-none active:translate-y-px disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
-        primary:
-          "bg-brand text-white shadow-[0_10px_30px_-12px_rgb(48_89_223/0.65)] hover:bg-brand-hover hover:shadow-[0_14px_34px_-12px_rgb(48_89_223/0.75)]",
-        outline:
-          "border-line-strong bg-surface text-ink hover:border-brand hover:text-brand",
-        light:
-          "bg-white text-ink-deep hover:bg-brand-soft",
-        ghostLight:
-          "border-white/25 text-white hover:border-white/60 hover:bg-white/10",
+        primary: "bg-brand text-white hover:bg-brand-hover",
+        ink: "bg-ink text-white hover:bg-ink-2",
+        outline: "border-ink bg-transparent text-ink hover:bg-ink hover:text-white",
+        light: "bg-white text-ink hover:bg-brand-soft",
+        ghostLight: "border-white/30 text-white hover:border-white hover:bg-white/10",
       },
       size: {
-        sm: "h-10 px-4 text-sm",
-        md: "h-12 px-5 text-[0.95rem]",
-        lg: "h-14 px-7 text-base",
+        sm: "h-9 px-4 text-[13px]",
+        md: "h-11 px-5 text-sm",
+        lg: "h-12 px-5 text-[15px]",
       },
     },
     defaultVariants: {

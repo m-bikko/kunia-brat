@@ -8,6 +8,9 @@ export interface SplitTitle {
   accent: string;
 }
 
+/** A display title split into lines exactly where the design breaks them. */
+export type Lines = readonly string[];
+
 export interface TextLink {
   label: string;
   href: string;
@@ -42,6 +45,17 @@ export interface Dictionary {
     title: string;
     description: string;
     ogImageAlt: string;
+  };
+  stamp: {
+    object: string;
+    objectValue: string;
+    stage: string;
+    stageValue: string;
+    project: string;
+    projectValue: string;
+    sheet: string;
+    /** `{n}` is the two-digit sheet number. */
+    sheetTag: string;
   };
   nav: {
     tagline: string;
