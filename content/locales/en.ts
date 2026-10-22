@@ -202,6 +202,7 @@ export const en: Dictionary = {
     teamText: "We coordinate the project, delivery, installation and launch.",
   },
   faq: {
+    label: "Notes",
     title: "What does a classroom fit-out include?",
     items: [
       {
@@ -235,13 +236,13 @@ export const en: Dictionary = {
     directoryText: "Equipment, the official equipment list and quote requests are on each subject page.",
   },
   g8: {
-    title: { lead: "Sports equipment", accent: "for schools." },
+    title: ["Sports equipment", "for schools."],
     text: "G8 is our school sports site: equipment for gyms, PE lessons, clubs and competitions. Buy individual items or a complete space.",
     cta: "Go to G8",
   },
   contact: {
     eyebrow: "Your classroom is next",
-    title: { lead: "What shall we", accent: "build together?" },
+    title: ["What shall we", "build together?"],
     text: "Choose a subject and tell us about the task. We will go through the equipment list and prepare a quote.",
     selectLabel: "Which classroom do you need?",
     submit: "Request a quote on WhatsApp",

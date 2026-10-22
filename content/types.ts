@@ -2,12 +2,6 @@ import type { CabinetId } from "@/content/cabinets";
 import type { PluralForms } from "@/lib/i18n";
 import type { QuoteTemplates } from "@/lib/quote-message";
 
-/** Two-part headline: the second part is rendered in the brand accent. */
-export interface SplitTitle {
-  lead: string;
-  accent: string;
-}
-
 /** A display title split into lines exactly where the design breaks them. */
 export type Lines = readonly string[];
 
@@ -149,19 +143,20 @@ export interface Dictionary {
     teamText: string;
   };
   faq: {
+    label: string;
     title: string;
     items: readonly FaqItem[];
     directoryTitle: string;
     directoryText: string;
   };
   g8: {
-    title: SplitTitle;
+    title: Lines;
     text: string;
     cta: string;
   };
   contact: {
     eyebrow: string;
-    title: SplitTitle;
+    title: Lines;
     text: string;
     selectLabel: string;
     submit: string;
