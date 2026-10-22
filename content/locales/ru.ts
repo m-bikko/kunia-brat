@@ -19,6 +19,7 @@ export const ru: Dictionary = {
     sheet: "Лист",
     sheetTag: "Лист {n}",
   },
+  intro: { caption: "Каждый кабинет начинается с оси", skip: "Пропустить интро" },
   nav: {
     skipToContent: "Перейти к содержанию",
     cabinets: "Кабинеты",

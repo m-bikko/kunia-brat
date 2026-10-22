@@ -252,3 +252,115 @@
     }
   }
 }
+/* ---------- Blueprint intro. Moments mirror components/intro/timeline.ts ---------- */
+.intro {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  /* Failsafe exit when the app's JS never takes over (it sets data-js and disables this). */
+  animation: intro-out 0.4s ease-in 4s both;
+}
+html[data-intro] .intro {
+  display: block;
+}
+.intro[data-js] {
+  animation: none;
+}
+html[data-intro="skip"] .intro {
+  animation: intro-out 0.3s ease-in both;
+}
+.intro-bg {
+  position: absolute;
+  inset: 0;
+  background-color: #1a3696;
+  animation: intro-develop 0.8s ease-in-out 2.6s both;
+}
+.intro-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: intro-fade-out 0.6s ease 2.6s both;
+}
+.intro-in {
+  animation: intro-fade-in 0.5s var(--ease-out-expo) var(--at, 0s) both;
+}
+.intro-pop {
+  animation: intro-pop 0.6s var(--ease-out-expo) var(--at, 0s) both;
+}
+.intro-draw {
+  stroke-dasharray: 1;
+  animation: intro-draw var(--dur, 0.7s) var(--ease-out-expo) var(--at, 0s) both;
+}
+.intro-out-at {
+  animation: intro-fade-out 0.5s ease var(--out, 2.6s) both;
+}
+.intro-in-out {
+  animation:
+    intro-fade-in 0.5s var(--ease-out-expo) var(--at, 0s) both,
+    intro-fade-out 0.4s ease var(--out, 2.5s) both;
+}
+.intro-grow-x {
+  transform-origin: left center;
+  animation: intro-grow-x 0.8s var(--ease-out-expo) 0.6s both;
+}
+.intro-grow-y {
+  transform-origin: center bottom;
+  animation: intro-grow-y 0.8s var(--ease-out-expo) 0.6s both;
+}
+@keyframes intro-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@keyframes intro-develop {
+  to {
+    background-color: var(--paper);
+  }
+}
+@keyframes intro-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes intro-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes intro-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+@keyframes intro-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes intro-grow-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes intro-grow-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+/* While the intro plays, the first screen waits: its reveal is paused and its drawing hidden. */
+html[data-intro="play"] :is(.reveal, .draw) {
+  animation-play-state: paused;
+}
+html[data-intro] [data-plan-target] {
+  visibility: hidden;
+}

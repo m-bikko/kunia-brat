@@ -1,3 +1,4 @@
+import { BlueprintIntro } from "@/components/intro/blueprint-intro";
 import { JsonLd } from "@/components/json-ld";
 import { Brands } from "@/components/sections/brands";
 import { Cabinets } from "@/components/sections/cabinets";
@@ -29,6 +30,7 @@ export const LandingPage = ({ locale }: { locale: Locale }): React.JSX.Element =
   return (
     <>
       <JsonLd locale={locale} t={t} />
+      <BlueprintIntro t={t.intro} />
       <SheetRuler />
       <SiteHeader locale={locale} t={t.nav} />
       <main id="main">

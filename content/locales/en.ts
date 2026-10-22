@@ -22,6 +22,7 @@ export const en: Dictionary = {
     sheet: "Sheet",
     sheetTag: "Sheet {n}",
   },
+  intro: { caption: "Every classroom starts with an axis", skip: "Skip intro" },
   nav: {
     skipToContent: "Skip to content",
     cabinets: "Classrooms",

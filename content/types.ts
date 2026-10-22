@@ -57,6 +57,10 @@ export interface Dictionary {
     /** `{n}` is the two-digit sheet number. */
     sheetTag: string;
   };
+  intro: {
+    caption: string;
+    skip: string;
+  };
   nav: {
     skipToContent: string;
     cabinets: string;

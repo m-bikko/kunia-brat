@@ -23,6 +23,7 @@ export const kk: Dictionary = {
     sheet: "Парақ",
     sheetTag: "{n}-парақ",
   },
+  intro: { caption: "Әр кабинет осьтен басталады", skip: "Интроны өткізу" },
   nav: {
     skipToContent: "Мазмұнға өту",
     cabinets: "Кабинеттер",
