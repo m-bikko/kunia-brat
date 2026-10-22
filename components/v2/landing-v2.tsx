@@ -1,9 +1,11 @@
 import { IntroScene } from "@/components/intro/intro-scene";
 import { IntroStage } from "@/components/intro/intro-stage";
+import { CabinetsV2 } from "@/components/v2/cabinets-v2";
 import { FooterV2 } from "@/components/v2/footer-v2";
 import { HeaderV2 } from "@/components/v2/header-v2";
 import { HeroV2 } from "@/components/v2/hero-v2";
 import { Order70V2 } from "@/components/v2/order70-v2";
+import { ProcessV2 } from "@/components/v2/process-v2";
 import { StagesV2 } from "@/components/v2/stages-v2";
 import { WhatsappFab } from "@/components/whatsapp-fab";
 import { getDictionary } from "@/content/dictionaries";
@@ -31,6 +33,8 @@ export const LandingV2 = ({ locale }: { locale: Locale }): React.JSX.Element => 
         <HeroV2 locale={locale} t={t} />
         <StagesV2 t={t.stages} />
         <Order70V2 locale={locale} t={t.order70} copy={t.v2.order70} items={t.cabinets.items} />
+        <CabinetsV2 locale={locale} t={t} />
+        <ProcessV2 t={t.process} states={t.v2.process.states} />
       </main>
       <FooterV2 locale={locale} t={t} />
       <WhatsappFab label={t.whatsappFab} variant="soft" />

@@ -70,3 +70,23 @@
     animation: none;
   }
 }
+
+/* Process: one classroom; parts beyond the active stage step back (data-stage on the wrapper). */
+.v2-stages [data-part] {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s var(--ease-out-expo);
+}
+.v2-stages[data-stage="0"] :is([data-part="teacher"], [data-part="desk"], [data-part="shelf"]),
+.v2-stages:is([data-stage="0"], [data-stage="1"]) :is([data-part="board"], [data-part="clock"]),
+.v2-stages:is([data-stage="0"], [data-stage="1"], [data-stage="2"]) :is([data-part="books"], [data-part="globe"], [data-part="stars"]) {
+  opacity: 0;
+  transform: translateY(10px) scale(0.85);
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-stages [data-part] {
+    transition: none;
+  }
+}

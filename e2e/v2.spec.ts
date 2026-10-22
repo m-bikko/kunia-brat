@@ -110,3 +110,17 @@ test("v2 tool: tick, count and send N items with the keyboard only", async ({ pa
   expect(new URL((await send.getAttribute("href")) ?? "").searchParams.get("text")).toContain("Информатика");
   await expect(tool.getByText("Есть 1 из 22")).toBeAttached();
 });
+
+test("eight cabinet cards link to their pages and show their Order 70 size", async ({ page }) => {
+  await page.goto("/v2#index");
+  const cards = page.locator("#index [data-cabinet]");
+  await expect(cards).toHaveCount(8);
+  await expect(cards.first().getByRole("link").first()).toHaveAttribute("href", "/kabinet-informatiki");
+  await expect(cards.first()).toContainText("22 позиции");
+});
+
+test("the process assembles the classroom step by step", async ({ page }) => {
+  await page.goto("/v2#process");
+  await expect(page.locator("#process [data-step]")).toHaveCount(4);
+  await expect(page.locator("#process [data-stage]")).not.toHaveCount(0);
+});

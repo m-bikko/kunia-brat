@@ -196,5 +196,14 @@ export interface Dictionary {
       liveSummary: string;
       shareLabel: string;
     };
+    index: {
+      hint: string;
+      /** `{n}` items of Order No. 70 in the cabinet. */
+      items: PluralForms;
+    };
+    process: {
+      /** Spoken and shown name of each state of the assembling classroom. */
+      states: readonly [string, string, string, string];
+    };
   };
 }

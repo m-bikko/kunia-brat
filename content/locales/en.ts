@@ -287,5 +287,15 @@ export const en: Dictionary = {
       liveSummary: "{have} of {total} in place",
       shareLabel: "Already at the school",
     },
+    index: {
+      hint: "Hover over a card to see the classroom concept.",
+      items: {
+        one: "{n} item in Order No. 70",
+        other: "{n} items in Order No. 70",
+      },
+    },
+    process: {
+      states: ["An empty room", "Furniture in place", "Equipment connected", "Ready for the first lesson"],
+    },
   },
 };
