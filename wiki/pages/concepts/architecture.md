@@ -35,6 +35,21 @@ sources: [app/, components/landing-page.tsx, next.config.ts]
 обычные `<a>`, не `next/link`: иначе Next префетчит несуществующие RSC-маршруты и сыплет 404. Решение и
 альтернативы — [[redesign-decisions]].
 
+## Интро и первый экран
+
+`SiteDocument` первым элементом `<body>` вставляет `IntroBoot` — inline-скрипт, который до первой отрисовки ставит
+`html[data-intro]`; у `<html>` стоит `suppressHydrationWarning`. Подробно — [[blueprint-intro]].
+
+## Данные Приказа № 70
+
+`scripts/data/order70-raw.json` → `scripts/extract_order70.py` → `content/order70.ts` (генерируется, вручную не правится).
+Подробно — [[order70-tool]].
+
+## Тесты
+
+`pnpm test:py` (разбор перечня), `pnpm test` (Vitest: данные, сообщение WhatsApp), `pnpm test:e2e`
+(сборка + Playwright в Chrome на порту 3200).
+
 ## Безопасность и аналитика
 
 - CSP и security-заголовки задаются в `next.config.ts` только для production. CSP разрешает GA4 и Яндекс.Метрику

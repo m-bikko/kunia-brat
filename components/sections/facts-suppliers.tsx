@@ -6,6 +6,7 @@ import { cabinetIds } from "@/content/cabinets";
 import type { Dictionary } from "@/content/types";
 import { plural, type Locale } from "@/lib/i18n";
 import { totalItems } from "@/lib/order70";
+import { cn } from "@/lib/utils";
 
 interface FactsSuppliersProps {
   locale: Locale;
@@ -47,7 +48,10 @@ export const FactsSuppliers = ({ locale, t, sheet }: FactsSuppliersProps): React
                 alt={brand.name}
                 sizes="160px"
                 unoptimized={brand.logo.src.endsWith(".svg")}
-                className="max-h-11 w-auto object-contain opacity-70 grayscale transition-[filter,opacity] duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+                className={cn(
+                  "max-h-11 w-auto object-contain opacity-70 grayscale transition-[filter,opacity] duration-300 group-hover:opacity-100 group-hover:grayscale-0",
+                  brand.invert && "invert",
+                )}
               />
             </li>
           ))}

@@ -13,3 +13,10 @@ test("facts are real numbers and every brand has a logo", async ({ page }) => {
   await expect(page.getByRole("img", { name: "Fabriano" })).toBeVisible();
   await expect(page.getByText("143")).toHaveCount(0);
 });
+
+test("the white-on-transparent ARG logo is inverted so it shows on white cells", async ({ page }) => {
+  await page.goto("/");
+  const logo = page.getByRole("img", { name: "ARG" });
+  await logo.evaluate((element) => element.scrollIntoView({ block: "center" }));
+  await expect(logo).toHaveCSS("filter", /invert\(1\)/);
+});

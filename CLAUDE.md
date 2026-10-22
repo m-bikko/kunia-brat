@@ -2,18 +2,23 @@
 
 # AXIS landing (axisgroup.kz)
 
-Лендинг AXIS: оснащение школьных кабинетов под ключ. Next.js 16.4 + Tailwind v4 + motion + Magic UI,
+Лендинг AXIS: оснащение школьных кабинетов под ключ. Концепт «Чертёж»: страница — набор листов чертежа,
+интро «Синька» при первом визите, инструмент подбора по Приказу № 70. Next.js 16.4 + Tailwind v4 + motion,
 три языка (ru на `/`, kk на `/kk`, en на `/en`). Обзор и команды — `README.md`.
 
 ## Правила проекта
 
 - Тексты только через словари `content/locales/{ru,kk,en}.ts`; новый ключ добавлять во все три (тип `Dictionary` это проверит).
-- В ru/kk перед тире ставить ` `. В en тире не использовать.
-- Цвета, радиусы, z-index — только токены из `app/globals.css`. Один акцент: `brand`.
-- Любая анимация уважает reduced motion; анимировать только transform и opacity.
+- Крупные заголовки — массивы строк (`Lines`); между строками в разметке нужен пробел `" "`.
+- В ru/kk перед тире ставить `\u00a0`. В en тире не использовать.
+- Язык чертежа: острые углы, линии 1px, синий `brand` — единственный цвет (`ok` только для статуса «есть»).
+  Цвета, z-index — только токены из `app/globals.css`.
+- Любая анимация уважает reduced motion; анимировать только transform, opacity и `stroke-dashoffset`.
+- Тайминги интро живут в двух местах: `components/intro/timeline.ts` и раздел «Blueprint intro» в `app/globals.css`.
+- Данные Приказа № 70 не править руками: `scripts/data/order70-raw.json` → `python3 scripts/extract_order70.py`.
 - Ссылки на страницы, которых нет в этом приложении, — обычный `<a>`, не `next/link`.
 - После правок `@theme` в `globals.css`: `rm -rf .next` перед сборкой (кэш Turbopack/Tailwind).
-- Проверка перед сдачей: `npx tsc --noEmit && pnpm lint && pnpm build`.
+- Перед сдачей: `pnpm test:py && pnpm test && npx tsc --noEmit && pnpm lint && pnpm test:e2e`.
 
 ## Wiki (База знаний)
 

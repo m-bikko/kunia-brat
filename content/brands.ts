@@ -12,15 +12,17 @@ import sulpakLogo from "@/assets/partners/sulpak.png";
 import technodomLogo from "@/assets/partners/technodom.svg";
 import vistaArtistaLogo from "@/assets/partners/vista-artista.jpeg";
 
-/** Manufacturer logos shown in the brands marquee. */
+/** Manufacturer logos shown in the brand grid (sheet 06). */
 export interface Brand {
   name: string;
   logo: StaticImageData;
+  /** White artwork on a transparent background: shown inverted so it reads on white cells. */
+  invert?: boolean;
 }
 
 export const brands: readonly Brand[] = [
   { name: "LG", logo: lgLogo },
-  { name: "ARG", logo: argLogo },
+  { name: "ARG", logo: argLogo, invert: true },
   { name: "Technodom", logo: technodomLogo },
   { name: "Sulpak", logo: sulpakLogo },
   { name: "Fabriano", logo: fabrianoLogo },

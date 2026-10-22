@@ -27,7 +27,7 @@ export const HeroSheet = ({ locale, t }: HeroSheetProps): React.JSX.Element => {
               <p className="reveal font-mono text-xs text-ink-muted">{t.hero.kicker}</p>
               <h1
                 id="hero-title"
-                className="mt-8 text-[clamp(3rem,7.2vw,6.5rem)] leading-[0.92] font-semibold tracking-[-0.055em] text-ink lg:mt-10"
+                className="mt-8 text-[clamp(2.25rem,7.2vw,6.5rem)] leading-[0.92] font-semibold tracking-[-0.055em] [overflow-wrap:anywhere] text-ink lg:mt-10"
               >
                 {lines.map((line, index) => (
                   <Fragment key={line}>

@@ -52,6 +52,6 @@ export const buildMetadata = (locale: Locale): Metadata => {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f5f7fc",
+  themeColor: "#f4f5f7",
   colorScheme: "light",
 };

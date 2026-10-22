@@ -3,15 +3,18 @@
 ## Concepts
 - [[architecture]] — Next.js 16, два root layout, статический пререндер, маршруты
 - [[i18n]] — словари ru/kk/en, плюрализация, тире, шрифт для казахских букв
-- [[design-system]] — токены бренда, формы, правила движения, Magic UI
+- [[design-system]] — язык «Чертёж»: токены, приёмы листа, движение
 - [[build-pitfalls]] — грабли Next 16 / Turbopack / cacheComponents
 
 ## Entities
-- [[landing-sections]] — порядок секций и что делает каждая
+- [[landing-sections]] — восемь листов лендинга и что делает каждый
 - [[process-illustration]] — изометрический класс из SVG-слоёв
+- [[blueprint-intro]] — интро «Синька»: сценарий, устройство, правила показа
+- [[order70-tool]] — инструмент подбора по Приказу № 70 и его данные
 
 ## Sources
 - [[2026-10-22-live-site-audit]] — аудит живого axisgroup.kz перед пересборкой
+- [[2026-10-22-screening-reference]] — разбор референса интро
 
 ## Analyses
 - [[redesign-decisions]] — ключевые решения редизайна и открытые вопросы
