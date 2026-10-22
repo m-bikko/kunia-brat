@@ -124,3 +124,21 @@ test("the process assembles the classroom step by step", async ({ page }) => {
   await expect(page.locator("#process [data-step]")).toHaveCount(4);
   await expect(page.locator("#process [data-stage]")).not.toHaveCount(0);
 });
+
+test("closing card sends the chosen classroom to WhatsApp", async ({ page }) => {
+  await page.goto("/v2#contact");
+  await page.locator("#contact select").selectOption("pottery");
+  const href = await page.locator("#contact").getByRole("link", { name: /WhatsApp/ }).getAttribute("href");
+  expect(new URL(href ?? "").searchParams.get("text")).toContain("Гончарная");
+});
+
+test("notes open one at a time and brands show every logo", async ({ page }) => {
+  await page.goto("/v2");
+  const notes = page.locator("#notes details");
+  await expect(notes.nth(0)).toHaveAttribute("open", "");
+  await notes.nth(1).locator("summary").click();
+  await expect(notes.nth(1)).toHaveAttribute("open", "");
+  await expect(notes.nth(0)).not.toHaveAttribute("open");
+  await expect(page.locator("#brands img")).toHaveCount(11);
+  await expect(page.locator("#production img")).toHaveCount(2);
+});

@@ -313,5 +313,8 @@ export const ru: Dictionary = {
     process: {
       states: ["Пустая комната", "Мебель на месте", "Техника подключена", "Кабинет готов к уроку"],
     },
+    production: {
+      sticker: "Свой цех",
+    },
   },
 };

@@ -205,5 +205,9 @@ export interface Dictionary {
       /** Spoken and shown name of each state of the assembling classroom. */
       states: readonly [string, string, string, string];
     };
+    production: {
+      /** Sticker on the workshop photo. */
+      sticker: string;
+    };
   };
 }

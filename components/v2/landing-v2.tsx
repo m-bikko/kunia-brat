@@ -1,11 +1,16 @@
 import { IntroScene } from "@/components/intro/intro-scene";
 import { IntroStage } from "@/components/intro/intro-stage";
 import { CabinetsV2 } from "@/components/v2/cabinets-v2";
+import { ClosingV2 } from "@/components/v2/closing-v2";
+import { FactsV2 } from "@/components/v2/facts-v2";
 import { FooterV2 } from "@/components/v2/footer-v2";
+import { G8V2 } from "@/components/v2/g8-v2";
 import { HeaderV2 } from "@/components/v2/header-v2";
 import { HeroV2 } from "@/components/v2/hero-v2";
+import { NotesV2 } from "@/components/v2/notes-v2";
 import { Order70V2 } from "@/components/v2/order70-v2";
 import { ProcessV2 } from "@/components/v2/process-v2";
+import { ProductionV2 } from "@/components/v2/production-v2";
 import { StagesV2 } from "@/components/v2/stages-v2";
 import { WhatsappFab } from "@/components/whatsapp-fab";
 import { getDictionary } from "@/content/dictionaries";
@@ -35,6 +40,11 @@ export const LandingV2 = ({ locale }: { locale: Locale }): React.JSX.Element => 
         <Order70V2 locale={locale} t={t.order70} copy={t.v2.order70} items={t.cabinets.items} />
         <CabinetsV2 locale={locale} t={t} />
         <ProcessV2 t={t.process} states={t.v2.process.states} />
+        <ProductionV2 t={t} />
+        <FactsV2 locale={locale} t={t} />
+        <NotesV2 t={t} />
+        <G8V2 t={t.g8} />
+        <ClosingV2 t={t.contact} address={t.footer.address} items={t.cabinets.items} />
       </main>
       <FooterV2 locale={locale} t={t} />
       <WhatsappFab label={t.whatsappFab} variant="soft" />

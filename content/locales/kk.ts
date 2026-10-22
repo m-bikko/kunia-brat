@@ -298,5 +298,8 @@ export const kk: Dictionary = {
     process: {
       states: ["Бос бөлме", "Жиһаз орнында", "Техника қосылды", "Кабинет сабаққа дайын"],
     },
+    production: {
+      sticker: "Өз цехымыз",
+    },
   },
 };

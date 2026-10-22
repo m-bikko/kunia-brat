@@ -297,5 +297,8 @@ export const en: Dictionary = {
     process: {
       states: ["An empty room", "Furniture in place", "Equipment connected", "Ready for the first lesson"],
     },
+    production: {
+      sticker: "Our own workshop",
+    },
   },
 };
