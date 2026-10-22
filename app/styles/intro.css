@@ -320,3 +320,139 @@ html[data-intro-kind="bell"] .intro-scene[data-kind="bell"] {
   animation: intro-chpok 0.4s var(--ease-spring) 2.7s;
 }
 
+/* ---------- Intro: pencil «Карандаш рисует» ---------- */
+.intro-pencil-stage {
+  container-type: inline-size;
+}
+/* The drawing: white lines on navy, part by part (pathLength 1 on every shape). */
+.intro-pencil-outline :is(path, rect, circle) {
+  stroke: #ffffff;
+  /* Gap longer than the path: no zero-length dash (a round-cap dot) at the end while hidden. */
+  stroke-dasharray: 1 2;
+  animation: intro-draw 0.55s ease-out var(--draw-at, 0.4s) both;
+}
+.intro-pencil-outline [data-part="room"] {
+  --draw-at: 0.35s;
+}
+.intro-pencil-outline [data-part="window"] {
+  --draw-at: 0.85s;
+}
+.intro-pencil-outline [data-part="board"] {
+  --draw-at: 1.1s;
+}
+.intro-pencil-outline [data-part="clock"] {
+  --draw-at: 1.2s;
+}
+.intro-pencil-outline [data-part="shelf"] {
+  --draw-at: 1.35s;
+}
+.intro-pencil-outline [data-part="teacher"] {
+  --draw-at: 1.55s;
+}
+.intro-pencil-outline [data-part="desk"] {
+  --draw-at: calc(1.7s + var(--i, 0) * 0.07s);
+}
+.intro-pencil-outline :is([data-part="books"], [data-part="globe"], [data-part="stars"]) {
+  --draw-at: 1.95s;
+}
+/* Then colour pops into each part over the drawing. */
+.intro-pencil-color [data-part] {
+  animation: intro-pop-soft 0.45s var(--ease-spring) var(--pop-at, 2.3s) both;
+}
+.intro-pencil-color [data-part="room"] {
+  animation: intro-fade-in 0.4s ease 2s both;
+}
+.intro-pencil-color [data-part="board"] {
+  --pop-at: 2.1s;
+}
+.intro-pencil-color [data-part="shelf"] {
+  --pop-at: 2.15s;
+}
+.intro-pencil-color [data-part="teacher"] {
+  --pop-at: 2.2s;
+}
+.intro-pencil-color [data-part="desk"] {
+  --pop-at: calc(2.25s + var(--i, 0) * 0.04s);
+}
+@keyframes intro-pop-soft {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+/* The pencil's tip sits on the point it is drawing; it travels in container units (cqw). */
+.intro-pencil {
+  width: 7cqw;
+  margin: -18.67cqw 0 0 -3.5cqw;
+  animation: intro-pencil-path 3s cubic-bezier(0.45, 0, 0.35, 1) 0.1s both;
+}
+.intro-pencil > svg {
+  transform-origin: 50% 100%;
+  rotate: 28deg;
+  animation: intro-pencil-bow 0.5s ease-in-out 2.45s;
+}
+.intro-pencil-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: intro-blink 2s ease 0.5s;
+}
+@keyframes intro-pencil-path {
+  0% {
+    opacity: 0;
+    transform: translate(-25cqw, 20cqw);
+  }
+  8% {
+    opacity: 1;
+  }
+  10% {
+    transform: translate(2.5cqw, 2.5cqw);
+  }
+  23% {
+    transform: translate(97.5cqw, 2.5cqw);
+  }
+  33% {
+    transform: translate(97.5cqw, 66cqw);
+  }
+  40% {
+    transform: translate(49cqw, 19cqw);
+  }
+  48% {
+    transform: translate(83cqw, 34cqw);
+  }
+  55% {
+    transform: translate(18cqw, 50cqw);
+  }
+  62% {
+    transform: translate(39cqw, 53cqw);
+  }
+  68% {
+    transform: translate(78cqw, 61cqw);
+  }
+  77%,
+  88% {
+    opacity: 1;
+    transform: translate(52cqw, 40cqw);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(130cqw, -30cqw);
+  }
+}
+@keyframes intro-pencil-bow {
+  50% {
+    transform: rotate(-30deg) translateY(4px);
+  }
+}
+@keyframes intro-blink {
+  0%,
+  8%,
+  90%,
+  100% {
+    transform: scaleY(1);
+  }
+  4%,
+  94% {
+    transform: scaleY(0.1);
+  }
+}
+

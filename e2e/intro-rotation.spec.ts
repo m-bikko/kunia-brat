@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 /** Cartoon intros built so far; each plays on both versions. */
-const cartoonKinds = ["pop", "blocks"] as const;
+const cartoonKinds = ["pop", "blocks", "pencil"] as const;
 
 for (const kind of cartoonKinds) {
   for (const path of ["/", "/v2"]) {

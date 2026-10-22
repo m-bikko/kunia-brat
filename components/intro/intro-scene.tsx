@@ -1,5 +1,6 @@
 import { BlocksScene } from "@/components/intro/scenes/blocks-scene";
 import { BlueprintScene } from "@/components/intro/scenes/blueprint-scene";
+import { PencilScene } from "@/components/intro/scenes/pencil-scene";
 import { PopScene } from "@/components/intro/scenes/pop-scene";
 import type { IntroKind } from "@/lib/intro";
 
@@ -12,6 +13,8 @@ export const IntroScene = ({ kind, caption }: { kind: IntroKind; caption: string
       return <PopScene caption={caption} />;
     case "blocks":
       return <BlocksScene caption={caption} />;
+    case "pencil":
+      return <PencilScene caption={caption} />;
     default:
       return null;
   }
