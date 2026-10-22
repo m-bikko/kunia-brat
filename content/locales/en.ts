@@ -276,5 +276,8 @@ export const en: Dictionary = {
   },
   v2: {
     menuLabel: "Menu",
+    hero: {
+      illustrationAlt: "Drawing of a classroom: an interactive panel, the teacher's desk, student desks, a bookcase and a globe",
+    },
   },
 };

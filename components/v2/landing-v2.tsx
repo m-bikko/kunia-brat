@@ -3,6 +3,7 @@ import { IntroStage } from "@/components/intro/intro-stage";
 import { FooterV2 } from "@/components/v2/footer-v2";
 import { HeaderV2 } from "@/components/v2/header-v2";
 import { HeroV2 } from "@/components/v2/hero-v2";
+import { StagesV2 } from "@/components/v2/stages-v2";
 import { WhatsappFab } from "@/components/whatsapp-fab";
 import { getDictionary } from "@/content/dictionaries";
 import { nunito } from "@/lib/fonts-v2";
@@ -27,6 +28,7 @@ export const LandingV2 = ({ locale }: { locale: Locale }): React.JSX.Element => 
       <HeaderV2 locale={locale} t={t.nav} menuLabel={t.v2.menuLabel} />
       <main id="main">
         <HeroV2 locale={locale} t={t} />
+        <StagesV2 t={t.stages} />
       </main>
       <FooterV2 locale={locale} t={t} />
       <WhatsappFab label={t.whatsappFab} variant="soft" />

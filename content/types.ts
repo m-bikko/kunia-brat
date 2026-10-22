@@ -185,5 +185,9 @@ export interface Dictionary {
   /** Strings that only the soft v2 landing uses; everything else is shared with v1. */
   v2: {
     menuLabel: string;
+    hero: {
+      /** Spoken description of the cartoon classroom on the first screen. */
+      illustrationAlt: string;
+    };
   };
 }

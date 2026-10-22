@@ -79,3 +79,13 @@ for (const width of [360, 390]) {
     });
   }
 }
+
+test("the first screen shows the classroom as the intro target with three labels", async ({ page }) => {
+  await page.goto("/v2");
+  const art = page.locator("[data-intro-target]");
+  await expect(art).toBeVisible();
+  await expect(art).toHaveAttribute("role", "img");
+  await expect(page.locator("[data-callout]")).toHaveCount(3);
+  await expect(page.getByRole("link", { name: /Приказу № 70/ }).first()).toHaveAttribute("href", "/v2#order70");
+  await expect(page.locator("#stages li")).toHaveCount(4);
+});
